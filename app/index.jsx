@@ -7,7 +7,7 @@ import CustomButton from '../components/CustomButton'
 
 const index = () => {
   return (
-    <SafeAreaView className="bg-cyan-100 h-full">
+    <SafeAreaView className="bg-gray-100 h-full">
       <ScrollView contentContainerStyle={{height: '100%'}}>
         <View className="w-full justify-center items-center h-full px-4">
           <CustomButton

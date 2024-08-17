@@ -5,33 +5,40 @@ import { Link } from 'expo-router'
 
 import FormField from '../../components/FormField'
 
+import { images } from '../../constants'
 import CustomButton from '../../components/CustomButton'
 
 const SignUp = () => {
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: ''
+    name: '',
+    nickname: '',
+    email: ''
   })
   const [isSubmitting, setIsSubmittion] = useState(false)
   const submit = () => {
 
   }
   return (
-    <SafeAreaView className="bg-cyan-100 h-full">
+    <SafeAreaView className="bg-gray-100 h-full">
       <ScrollView>
-        <View className="w-full justify-center h-full px-4 my-6">
-          {/* <Image
+        <View className="w-full justify-center items-center h-full px-4 my-2">
+          <Image
             source={images.logo}
             resizeMode='contain'
-            className="w-[115px] h-[35px]"
-          /> */}
-          <Text className="text-2xl text-white text-semibold mt-10 font psemibold">Sign up to Aora</Text>
+            className="w-[120px] h-[120px]"
+          />
+          <Text className="text-2xl text-gray-900 text-semibold font-psemibold">Create Account</Text>
           <FormField
-            title="Username"
-            value={form.username}
-            handleChangeText={(e) => setForm({ ...form, username: e})}
-            otherStyles="mt-10"
+            title="Name"
+            value={form.name}
+            handleChangeText={(e) => setForm({ ...form, name: e})}
+            otherStyles="mt-7"
+          />
+          <FormField
+            title="NickName"
+            value={form.nickname}
+            handleChangeText={(e) => setForm({ ...form, nickname: e})}
+            otherStyles="mt-7"
           />
           <FormField
             title="Email"
@@ -40,18 +47,19 @@ const SignUp = () => {
             otherStyles="mt-7"
             keyboardType="email-address"
           />
-          <FormField
-            title="Password"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, passowrd: e})}
-            otherStyles="mt-7"
-          />
-          <CustomButton
-            title="Sign In"
-            handlePress={submit}
-            containerStyles="mt-7"
-            isLoading={isSubmitting}
-          />
+          <View className="justify-center h-[120px] bg-white p-8 rounded-xl w-full mt-7">
+            <Text className="text-lg text-black-100 font-pregular "> Do you agree for the terms and conditions!</Text>
+            <CustomButton
+              title="Sign Up"
+              handlePress={submit}
+              containerStyles="mt-2"
+              isLoading={isSubmitting}
+            />
+          </View>
+          <View className="justify-center pt-2 flex-row gap-2">
+            <Text className="text-lg text-gray-800 font-pregular">Have an account allready?</Text>
+            <Link href="/sign-in" className="text-lg font-psemibold text-orange-400">Sign In</Link>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
