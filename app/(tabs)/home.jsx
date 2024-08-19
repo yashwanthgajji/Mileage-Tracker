@@ -1,13 +1,21 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity, Picker } from 'react-native'
+import React, { useState } from 'react'
 
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import {icons, images} from '../../constants'
-import { Dropdown } from 'react-native-element-dropdown'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
+import { SelectList } from 'react-native-dropdown-select-list'
 
 const Home = () => {
+  const [vehicleSelected, setVehicleSelected] = useState('')
+
   posts = [{id: 1}, {id: 2}]
+  const data = [
+    { key: '1', value: 'Java' },
+    { key: '2', value: 'JavaScript' },
+    { key: '3', value: 'Python' },
+  ];
+
   return (
     <SafeAreaView className="bg-background h-full">
       <ScrollView >
@@ -32,6 +40,18 @@ const Home = () => {
           posts.length != 0 ? (
             <View className="w-full justify-center items-center mt-2">
               <Text className="text-xl font-pregular text-primary-800 text-center px-6">Here is everything about your</Text>
+              <SelectList
+                setSelected={(val) => setVehicleSelected(val)}
+                data={data}
+                save="value"
+                placeholder="Select a vehicle"
+                boxStyles={{width:256, marginTop: 24}}
+                maxHeight={120}
+                dropdownItemStyles={{padding: 20}}
+                dropdownStyles={{backgroundColor: '#60a5fa'}}
+                dropdownTextStyles={{color: '#1E1E2D'}}
+                notFoundText='No Vehicle Found'
+              />
               <EmptyRefuellingView
                 containerStyles = "mt-4"
               />
