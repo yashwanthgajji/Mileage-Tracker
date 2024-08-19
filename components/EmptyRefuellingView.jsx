@@ -6,7 +6,7 @@ import CustomButton from '../components/CustomButton'
 
 const EmptyRefuellingView = ({ containerStyles }) => {
   return (
-    <View className={`justify-center items-center w-full h-[356px] flex-col space-y-4 ${containerStyles}`}>
+    <View className={`justify-center items-center w-full h-[320px] flex-col space-y-4 ${containerStyles}`}>
       <Image
         source={images.cloud}
         className="w-24 h-24"

@@ -5,6 +5,8 @@ import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import {icons, images} from '../../constants'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { SelectList } from 'react-native-dropdown-select-list'
+import VehicleDisplay from '../../components/VehicleDisplay'
+import RefuellingItemView from '../../components/RefuellingItemView'
 
 const Home = () => {
   const [vehicleSelected, setVehicleSelected] = useState('')
@@ -52,9 +54,10 @@ const Home = () => {
                 dropdownTextStyles={{color: '#1E1E2D'}}
                 notFoundText='No Vehicle Found'
               />
-              <EmptyRefuellingView
+              <VehicleDisplay 
                 containerStyles = "mt-4"
               />
+              <EmptyRefuellingView/>
             </View>
           ) : (
             <View className="w-full justify-center items-center mt-2">
