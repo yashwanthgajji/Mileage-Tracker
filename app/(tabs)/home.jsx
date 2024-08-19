@@ -57,7 +57,13 @@ const Home = () => {
               <VehicleDisplay 
                 containerStyles = "mt-4"
               />
-              <EmptyRefuellingView/>
+              {/* <EmptyRefuellingView/> */}
+              <RefuellingItemView
+                containerStyles="mt-7 mx-3"
+                date="Wed, 22 Dec'23"
+                fuel="11.5L"
+                cost="+Rs:350.54"
+              />
             </View>
           ) : (
             <View className="w-full justify-center items-center mt-2">

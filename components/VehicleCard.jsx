@@ -27,7 +27,7 @@ const VehicleCard = ({ containerStyles }) => {
         }
         </View>
         <View className="w-full flex-row items-center justify-start m-2 px-4 space-x-1">
-            <View className="w-full flex-col items-start justify-center space-x-1 flex-1">
+            <View className="w-full flex-col items-start justify-center space-y-1 flex-1">
                 <Text className="text-primary-800 text-base font-pregular">Royal Enfield</Text>
                 <Text className="text-black-200 text-xs font-pmedium">2 Wheeler</Text>
             </View>
