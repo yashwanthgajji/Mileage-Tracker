@@ -17,7 +17,7 @@ const CustomButton = ({title, handlePress, containerStyles, textStyles, isLoadin
         {isRightShown && (
           <Image 
             source={icons.right}
-            className="w-[24px] h-[24px]"
+            className="w-6 h-6"
             resizeMode='contain'
           />
         )}
