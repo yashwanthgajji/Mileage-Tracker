@@ -6,7 +6,7 @@ import {images} from '../constants'
 const RefuellingItemView = ({containerStyles, date, fuel, cost}) => {
   return (
     <View className={containerStyles}>
-    <View className={`bg-gray-100 w-full h-16 rounded-xl justify-start items-center flex-row`}>
+    <View className={`bg-gray-100 w-full h-16 rounded-xl justify-start items-center flex-row mb-4`}>
         <Image 
             source={images.fuel}
             className="w-8 h-8 mx-4 flex-initial"

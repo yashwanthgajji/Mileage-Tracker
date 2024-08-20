@@ -7,6 +7,7 @@ import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { SelectList } from 'react-native-dropdown-select-list'
 import VehicleDisplay from '../../components/VehicleDisplay'
 import RefuellingItemView from '../../components/RefuellingItemView'
+import RefuellingList from '../../components/RefuellingList'
 
 const Home = () => {
   const [vehicleSelected, setVehicleSelected] = useState('')
@@ -17,6 +18,14 @@ const Home = () => {
     { key: '2', value: 'JavaScript' },
     { key: '3', value: 'Python' },
   ];
+  const refuels = [
+    { date: "Wed, 22 Dec'23", fuel: "2.5L", cost: "+Rs:150.54" },
+    { date: "Fri, 1 Feb'24", fuel: "1L", cost: "+Rs:90.24" },
+    { date: "Sun, 15 Apr'24", fuel: "3.1L", cost: "+Rs:300" },
+    { date: "Fri, 1 Feb'24", fuel: "1L", cost: "+Rs:90.24" },
+    { date: "Sun, 15 Apr'24", fuel: "3.1L", cost: "+Rs:300" },
+  ]
+  // const refuels= []
 
   return (
     <SafeAreaView className="bg-background h-full">
@@ -47,7 +56,7 @@ const Home = () => {
                 data={data}
                 save="value"
                 placeholder="Select a vehicle"
-                boxStyles={{width:256, marginTop: 24}}
+                boxStyles={{width:360, marginTop: 24}}
                 maxHeight={120}
                 dropdownItemStyles={{padding: 20}}
                 dropdownStyles={{backgroundColor: '#60a5fa'}}
@@ -57,13 +66,16 @@ const Home = () => {
               <VehicleDisplay 
                 containerStyles = "mt-4"
               />
-              {/* <EmptyRefuellingView/> */}
-              <RefuellingItemView
-                containerStyles="mt-7 mx-3"
-                date="Wed, 22 Dec'23"
-                fuel="11.5L"
-                cost="+Rs:350.54"
-              />
+              {
+                refuels.length == 0 ? (
+                  <EmptyRefuellingView/>
+                ) : (
+                  <RefuellingList 
+                    containerStyles="mt-7 mb-4"
+                    refuels={refuels}
+                  />
+                )
+              }
             </View>
           ) : (
             <View className="w-full justify-center items-center mt-2">
