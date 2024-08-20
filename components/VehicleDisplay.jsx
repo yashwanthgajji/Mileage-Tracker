@@ -5,7 +5,7 @@ import { images } from '../constants'
 const VehicleDisplay = ({ containerStyles }) => {
     const hasVehicleImage = true
     return (
-    <View className={`w-96 h-56 rounded-2xl justify-center items-center bg-white ${containerStyles}`}>
+    <View className={`w-full h-56 rounded-2xl justify-center items-center bg-white ${containerStyles}`}>
         <View className="w-[97%] h-[95%] rounded-xl">
         { 
             hasVehicleImage ? (

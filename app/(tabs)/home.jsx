@@ -31,7 +31,7 @@ const Home = () => {
 
   return (
     <SafeAreaView className="bg-background h-full">
-      <ScrollView >
+      <ScrollView>
       <View className="w-full justify-center items-center h-full px-5 my-10">
         <TouchableOpacity
           className="w-full items-start"
