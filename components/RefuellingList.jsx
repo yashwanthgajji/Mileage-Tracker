@@ -9,7 +9,7 @@ const RefuellingList = ({containerStyles, refuels}) => {
             <Text className="flex-initial text-lg text-primary-800 font-psemibold">Refuelling History</Text>
             <Text className="ml-auto text-base text-secondary-600 font-pregular">See all</Text>
         </View>
-        <View className="w-full max-h-[420px] bg-gray-600 pt-4 flex-col justify-center items-center">
+        <View className="w-full max-h-[420px] bg-gray-300 pt-4 flex-col justify-center items-center">
             {refuels.map((refuel, index) => (
                 <RefuellingItemView
                     containerStyles="px-4"

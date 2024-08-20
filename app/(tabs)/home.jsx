@@ -61,7 +61,7 @@ const Home = () => {
                 boxStyles={{width:360, marginTop: 24}}
                 maxHeight={120}
                 dropdownItemStyles={{padding: 20}}
-                dropdownStyles={{backgroundColor: '#60a5fa'}}
+                dropdownStyles={{backgroundColor: '#bfdbfe'}}
                 dropdownTextStyles={{color: '#1E1E2D'}}
                 notFoundText='No Vehicle Found'
               />

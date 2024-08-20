@@ -21,7 +21,10 @@ const MoneySpendChartView = ({containerStyles, months, moneySpent}) => {
                 <BarChart 
                     data={data}
                     yAxisLabel=''
-                    yAxisSuffix='K'
+                    yAxisSuffix=''
+                    yLabelsOffset={20}
+                    xLabelsOffset={10}
+                    fromZero={true}
                     width={340}
                     height={240}
                     chartConfig={{
@@ -39,7 +42,6 @@ const MoneySpendChartView = ({containerStyles, months, moneySpent}) => {
                     showBarTops={false}
                     withCustomBarColorFromData
                     flatColor
-                    fromZero={true}
                 />
             </View>
         </View>

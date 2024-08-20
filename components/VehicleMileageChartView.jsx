@@ -22,6 +22,8 @@ const VehicleMileageChartView = ({containerStyles, months, moneySpent}) => {
                     data={data}
                     yAxisLabel=''
                     yAxisSuffix=''
+                    yLabelsOffset={25}
+                    xLabelsOffset={10}
                     width={340}
                     height={240}
                     chartConfig={{
