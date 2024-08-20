@@ -6,8 +6,8 @@ import {icons, images} from '../../constants'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { SelectList } from 'react-native-dropdown-select-list'
 import VehicleDisplay from '../../components/VehicleDisplay'
-import RefuellingItemView from '../../components/RefuellingItemView'
 import RefuellingList from '../../components/RefuellingList'
+import FuelInsightsView from '../../components/FuelInsightsView'
 
 const Home = () => {
   const [vehicleSelected, setVehicleSelected] = useState('')
@@ -70,10 +70,17 @@ const Home = () => {
                 refuels.length == 0 ? (
                   <EmptyRefuellingView/>
                 ) : (
-                  <RefuellingList 
-                    containerStyles="mt-7 mb-4"
-                    refuels={refuels}
-                  />
+                  <View>
+                    <FuelInsightsView 
+                      containerStyles="mt-7 mb-4"
+                      avgFuel={"25 km/L"}
+                      lastFuel={"20 km/L"}
+                    />
+                    <RefuellingList 
+                      containerStyles="mt-7 mb-4"
+                      refuels={refuels}
+                    />
+                  </View>
                 )
               }
             </View>
