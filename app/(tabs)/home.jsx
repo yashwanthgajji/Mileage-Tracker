@@ -8,6 +8,8 @@ import { SelectList } from 'react-native-dropdown-select-list'
 import VehicleDisplay from '../../components/VehicleDisplay'
 import RefuellingList from '../../components/RefuellingList'
 import FuelInsightsView from '../../components/FuelInsightsView'
+import MoneySpendChartView from '../../components/MoneySpendChartView'
+import VehicleMileageChartView from '../../components/VehicleMileageChartView'
 
 const Home = () => {
   const [vehicleSelected, setVehicleSelected] = useState('')
@@ -72,9 +74,19 @@ const Home = () => {
                 ) : (
                   <View>
                     <FuelInsightsView 
-                      containerStyles="mt-7 mb-4"
+                      containerStyles="mt-7"
                       avgFuel={"25 km/L"}
                       lastFuel={"20 km/L"}
+                    />
+                    <MoneySpendChartView
+                      containerStyles="mt-7"
+                      months={["January", "February", "March", "April", "May"]}
+                      moneySpent={[2000, 1400, 3400, 1800, 2000]}
+                    />
+                    <VehicleMileageChartView
+                      containerStyles="mt-7"
+                      months={["January", "February", "March", "April", "May"]}
+                      moneySpent={[15, 20, 32, 12, 20]}
                     />
                     <RefuellingList 
                       containerStyles="mt-7 mb-4"

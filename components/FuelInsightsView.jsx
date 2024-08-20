@@ -1,6 +1,5 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
-import RefuellingItemView from './RefuellingItemView'
 
 const FuelInsightsView = ({containerStyles, avgFuel, lastFuel}) => {
   return (
