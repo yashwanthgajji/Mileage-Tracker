@@ -1,9 +1,9 @@
 import { View, Text, TextInput } from 'react-native'
+import React from 'react'
 
-const FormField = ({title, value, placeholder, handleChangeText, otherStyles, ...props}) => {
-    return (
+const PassCodeField = ({otherStyles, value, placeholder, handleChangeText}) => {
+  return (
     <View className={`space-y-2 ${otherStyles}`}>
-      <Text className="text-lg text-primary-800 font-pregular">{title}</Text>
       <View
         className="border-2 border-black w-full h-16 px-4 bg-background-200 rounded-2xl focus:border-secondary items-center flex-row"
       >
@@ -13,10 +13,12 @@ const FormField = ({title, value, placeholder, handleChangeText, otherStyles, ..
             placeholder={placeholder}
             placeholderTextColor="#7b7b8b"
             onChangeText={handleChangeText}
+            keyboardType="number-pad"
+            maxLength={4}
         />
       </View>
     </View>
   )
 }
 
-export default FormField
+export default PassCodeField
