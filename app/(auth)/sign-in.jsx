@@ -35,7 +35,7 @@ const SignIn = () => {
     } else {
       const user = users.find(user => user.id === form.userSelected)
       if (user && user.passcode === form.passcode) {
-        setUser(userData)
+        setUser(user)
         setIsLoggedIn(true)
         router.replace('/home')
       } else {

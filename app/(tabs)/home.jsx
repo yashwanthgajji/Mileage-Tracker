@@ -10,8 +10,10 @@ import RefuellingList from '../../components/RefuellingList'
 import FuelInsightsView from '../../components/FuelInsightsView'
 import MoneySpendChartView from '../../components/MoneySpendChartView'
 import VehicleMileageChartView from '../../components/VehicleMileageChartView'
+import { useUserStore } from '../../context/GlobalContext'
 
 const Home = () => {
+  const { user } = useUserStore();
   const [vehicleSelected, setVehicleSelected] = useState('')
 
   posts = [{id: 1}, {id: 2}]
@@ -48,7 +50,7 @@ const Home = () => {
           resizeMode='contain'
           className="w-[48px] h-[48px]"
         />
-        <Text className="font-pbold text-3xl text-secondary-600 mt-4">Hi, Snack Muncher</Text>
+        <Text className="font-pbold text-3xl text-secondary-600 mt-4">Hi, {user.nickname}</Text>
         {
           posts.length != 0 ? (
             <View className="w-full justify-center items-center mt-2">
