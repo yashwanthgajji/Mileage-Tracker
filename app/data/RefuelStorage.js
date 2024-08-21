@@ -1,0 +1,68 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const REFUEL_STORAGE_KEY = 'REFUELS';
+
+export const addRefuel = async (refuel) => {
+  try {
+    const refuelsString = await AsyncStorage.getItem(REFUEL_STORAGE_KEY);
+    let refuels = [];
+    if (refuelsString) {
+      refuels = JSON.parse(refuelsString);
+    }
+    refuels.push(refuel);
+    await AsyncStorage.setItem(REFUEL_STORAGE_KEY, JSON.stringify(refuels));
+    console.log('Refuel added successfully!');
+  } catch (error) {
+    console.error('Error adding refuel:', error);
+  }
+};
+
+export const getRefuelById = async (id) => {
+  try {
+    // Retrieve the refuels array from AsyncStorage
+    const refuelsString = await AsyncStorage.getItem(REFUEL_STORAGE_KEY);
+    let refuels = [];
+    if (refuelsString) {
+      refuels = JSON.parse(refuelsString);
+      const refuel = refuels.find((refuel) => refuel.id === id);
+      return refuel;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting refuel:', error);
+    return null;
+  }
+};
+
+export const getAllRefuelsByUserId = async (userId) => {
+    try {
+      const refuelsString = await AsyncStorage.getItem(REFUEL_STORAGE_KEY);
+      if (refuelsString) {
+        let refuels = JSON.parse(refuelsString);
+        const userRefuels = refuels.filter((refuel) => refuel.userId === userId);
+        return userRefuels.sort((a, b) => b.id - a.id);
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error('Error getting all refuels by user ID:', error);
+      return [];
+    }
+};
+
+export const getTop5RefuelsByUserId = async (userId) => {
+    try {
+      const refuelsString = await AsyncStorage.getItem(REFUEL_STORAGE_KEY);
+      if (refuelsString) {
+        let refuels = JSON.parse(refuelsString);
+        const userRefuels = refuels.filter((refuel) => refuel.userId === userId);
+        return userRefuels.sort((a, b) => b.id - a.id).slice(0, 5); // Sort in descending order of refuel IDs and take top 5
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error('Error getting top 5 refuels by user ID:', error);
+      return [];
+    }
+};

@@ -3,6 +3,7 @@ import React from 'react'
 import { images } from '../constants'
 
 import CustomButton from '../components/CustomButton'
+import { router } from 'expo-router'
 
 const EmptyVehicleListView = ({ containerStyles }) => {
   return (
@@ -15,7 +16,7 @@ const EmptyVehicleListView = ({ containerStyles }) => {
       <Text className="text-xl font-pregular text-primary-800 text-center px-4">Add a vehicle to start tracking its performance and refuelling</Text>
       <CustomButton
         title="Add Vehicle"
-        handlePress={() => {}}
+        handlePress={() => {router.push('/createVehicle')}}
         containerStyles="mt-7 w-[216px]"
         isRightShown = {true}
       />
