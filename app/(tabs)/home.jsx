@@ -19,6 +19,7 @@ const Home = () => {
   const [vehicles, setVehicles] = useState([])
   const [vehicleListData, setVehicleListData] = useState([]);
   const [refuels, setRefuels] = useState([])
+  const [top5Refuels, setTop5Refuels] = useState([])
   useEffect(() => {
     const fetchVehicles = async () => {
       const vehicles = await getAllVehiclesByUserId(user.id);
@@ -33,12 +34,12 @@ const Home = () => {
   }, []);
 
   const setVehicleValue = async (val) => {
-    console.log(val)
     const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
     setVehicleSelected(selectedVehicle);
-    const refuels = await getTop5RefuelsByVehicleId(val);
+    const refuels = await getAllRefuelsByVehicleId(val);
+    const top5Refuels = await getTop5RefuelsByVehicleId(val);
     setRefuels(refuels);
-    console.log(refuels);
+    setTop5Refuels(top5Refuels);
   }
   // const refuels= []
 
@@ -92,22 +93,19 @@ const Home = () => {
                       <View>
                         <FuelInsightsView 
                           containerStyles="mt-7"
-                          avgFuel={"25 km/L"}
-                          lastFuel={"20 km/L"}
+                          refuels={refuels}
                         />
                         <MoneySpendChartView
                           containerStyles="mt-7"
-                          months={["January", "February", "March", "April", "May"]}
-                          moneySpent={[2000, 1400, 3400, 1800, 2000]}
+                          refuels={refuels}
                         />
                         <VehicleMileageChartView
                           containerStyles="mt-7"
-                          months={["January", "February", "March", "April", "May"]}
-                          moneySpent={[15, 20, 32, 12, 20]}
+                          refuels={refuels}
                         />
                         <RefuellingList 
                           containerStyles="mt-7 mb-4"
-                          refuels={refuels}
+                          refuels={top5Refuels}
                         />
                       </View>
                     )

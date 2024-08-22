@@ -1,19 +1,42 @@
 import { View, Text, SafeAreaView, FlatList, ScrollView } from 'react-native'
-import React, { useState } from 'react'
-import RefuellingItemView from '../../components/RefuellingItemView'
+import React, { useEffect, useState } from 'react'
 import { SelectList } from 'react-native-dropdown-select-list'
 import MoneySpendChartView from '../../components/MoneySpendChartView'
 import VehicleMileageChartView from '../../components/VehicleMileageChartView'
 import FuelInsightsView from '../../components/FuelInsightsView'
+import { useUserStore } from '../../context/GlobalContext'
+import { getAllVehiclesByUserId } from '../data/VehicleStorage'
+import { getAllRefuelsByVehicleId } from '../data/RefuelStorage'
+import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 
 const Performance = () => {
-  const [vehicleSelected, setVehicleSelected] = useState('')
+  const { user, vehicleSelected, setVehicleSelected } = useUserStore();
+  const [vehicles, setVehicles] = useState([])
+  const [vehicleListData, setVehicleListData] = useState([]);
+  const [refuels, setRefuels] = useState([])
 
-  const data = [
-    { key: '1', value: 'Java' },
-    { key: '2', value: 'JavaScript' },
-    { key: '3', value: 'Python' },
-  ];
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      const vehicles = await getAllVehiclesByUserId(user.id);
+      setVehicles(vehicles)
+      const vehicleListData = vehicles.map((vehicle) => ({
+        key: vehicle.id,
+        value: vehicle.name,
+      }));
+      setVehicleListData(vehicleListData);
+    };
+    fetchVehicles();
+  }, []);
+
+  
+  const setVehicleValue = async (val) => {
+    // console.log(val)
+    const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
+    setVehicleSelected(selectedVehicle);
+    const refuels = await getAllRefuelsByVehicleId(val);
+    setRefuels(refuels);
+    // console.log(refuels)
+  }
 
   return (
     <SafeAreaView className="bg-background h-full">
@@ -21,9 +44,9 @@ const Performance = () => {
         <View className="w-full justify-center items-center px-5 my-10">
           <Text className="text-2xl text-start w-full mt-7 text-primary-800 font-psemibold">Performance</Text>
           <SelectList
-            setSelected={(val) => setVehicleSelected(val)}
-            data={data}
-            save="value"
+            setSelected={(val) => setVehicleValue(val)}
+            data={vehicleListData}
+            save="key"
             placeholder="Select a vehicle"
             boxStyles={{width:360, marginTop: 24}}
             maxHeight={120}
@@ -31,24 +54,30 @@ const Performance = () => {
             dropdownStyles={{backgroundColor: '#bfdbfe'}}
             dropdownTextStyles={{color: '#1E1E2D'}}
             notFoundText='No Vehicle Found'
+            defaultOption={{ key: vehicleSelected?.id, value: vehicleSelected?.name }}
           />
-          <View className="w-full">
-            <FuelInsightsView 
-              containerStyles="mt-7"
-              avgFuel={"25 km/L"}
-              lastFuel={"20 km/L"}
-            />
-            <MoneySpendChartView
-              containerStyles="mt-7"
-              months={["January", "February", "March", "April", "May"]}
-              moneySpent={[2000, 1400, 3400, 1800, 2000]}
-            />
-            <VehicleMileageChartView
-              containerStyles="mt-7"
-              months={["January", "February", "March", "April", "May"]}
-              moneySpent={[15, 20, 32, 12, 20]}
-            />
-          </View>
+          {
+            refuels.length == 0 ? (
+              <EmptyRefuellingView 
+                containerStyles="mt-24"
+              />
+            ) : (
+              <View className="w-full">
+                <FuelInsightsView 
+                  containerStyles="mt-7"
+                  refuels = {refuels}
+                />
+                <MoneySpendChartView
+                  containerStyles="mt-7"
+                  refuels={refuels}
+                />
+                <VehicleMileageChartView
+                  containerStyles="mt-7"
+                  refuels={refuels}
+                />
+              </View>
+            )
+          }
         </View>
       </ScrollView>
     </SafeAreaView>

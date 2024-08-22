@@ -1,6 +1,6 @@
 import { View, Text, TextInput } from 'react-native'
 
-const FormField = ({title, value, placeholder, isRequired, handleChangeText, otherStyles, ...props}) => {
+const FormField = ({ title, value, placeholder, isRequired, handleChangeText, otherStyles, keyboardType }) => {
     return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-lg text-primary-800 font-pregular">
@@ -18,6 +18,7 @@ const FormField = ({title, value, placeholder, isRequired, handleChangeText, oth
             placeholder={placeholder}
             placeholderTextColor="#7b7b8b"
             onChangeText={handleChangeText}
+            keyboardType={keyboardType}
         />
       </View>
     </View>

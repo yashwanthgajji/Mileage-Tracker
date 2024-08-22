@@ -6,18 +6,15 @@ import CustomButton from '../../components/CustomButton'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { useUserStore } from '../../context/GlobalContext'
 import { getAllVehiclesByUserId } from '../data/VehicleStorage'
-import { getAllRefuels, getAllRefuelsByVehicleId } from '../data/RefuelStorage'
+import { getAllRefuelsByVehicleId } from '../data/RefuelStorage'
+import { router } from 'expo-router'
 
 const Refuelling = () => {
   const { user, vehicleSelected, setVehicleSelected } = useUserStore();
   const [vehicles, setVehicles] = useState([])
   const [vehicleListData, setVehicleListData] = useState([]);
   const [refuels, setRefuels] = useState([])
-  // if(vehicleSelected) {
-  //   getAllRefuelsByVehicleId(vehicleSelected.id).then((refuels) => {
-  //     setRefuels(refuels);
-  //   });
-  // }
+
   useEffect(() => {
     const fetchVehicles = async () => {
       const vehicles = await getAllVehiclesByUserId(user.id);
@@ -32,12 +29,12 @@ const Refuelling = () => {
   }, []);
 
   const setVehicleValue = async (val) => {
-    console.log(val)
+    // console.log(val)
     const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
     setVehicleSelected(selectedVehicle);
     const refuels = await getAllRefuelsByVehicleId(val);
     setRefuels(refuels);
-    console.log(refuels)
+    // console.log(refuels)
   }
 
   return (
@@ -66,7 +63,7 @@ const Refuelling = () => {
             <View className="w-full justify-center items-center">
               <CustomButton
                 title="Add Refuelling"
-                handlePress={() => {}}
+                handlePress={() => {router.push('/createRefuel')}}
                 containerStyles="mt-7 w-full"
                 isRightShown = {true}
               />

@@ -1,14 +1,24 @@
-import { View, Text, useWindowDimensions } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import { BarChart } from 'react-native-chart-kit'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const MoneySpendChartView = ({containerStyles, months, moneySpent}) => {
-    const { width } = useWindowDimensions();
+const MoneySpendChartView = ({containerStyles, refuels}) => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const moneySpent = months.map((month, index) => {
+        const monthStart = new Date(new Date().getFullYear(), index, 1).getTime();
+        const monthEnd = new Date(new Date().getFullYear(), index + 1, 0).getTime();
+        const refuelsInMonth = refuels.filter(refuel => refuel.date >= monthStart && refuel.date <= monthEnd);
+        const totalCost = refuelsInMonth.reduce((acc, refuel) => acc + parseInt(refuel.cost, 10), 0);
+        return totalCost / 1000;
+    });
+    console.log(moneySpent)
+    
     const data = {
         labels: months,
         datasets: [{
             data: moneySpent,
-            colors: [() => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c']
+            colors: [() => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c']
         }]
     }
 
@@ -21,7 +31,7 @@ const MoneySpendChartView = ({containerStyles, months, moneySpent}) => {
                 <BarChart 
                     data={data}
                     yAxisLabel=''
-                    yAxisSuffix=''
+                    yAxisSuffix='K'
                     yLabelsOffset={20}
                     xLabelsOffset={10}
                     fromZero={true}
@@ -31,12 +41,12 @@ const MoneySpendChartView = ({containerStyles, months, moneySpent}) => {
                         backgroundGradientFrom:'white',
                         backgroundGradientTo:'white',
                         color: () => '#ea580c',
-                        barPercentage:  0.5,
-                        barRadius: 8,
+                        barPercentage:  0.35,
+                        barRadius: 4,
                         propsForBackgroundLines:{
                             stroke: '#6b7280',
                             strokeWidth: 1,
-                        }
+                        },
                     }}
                     withInnerLines
                     showBarTops={false}

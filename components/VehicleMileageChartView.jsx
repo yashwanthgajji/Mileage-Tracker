@@ -2,13 +2,29 @@ import { View, Text, useWindowDimensions } from 'react-native'
 import React from 'react'
 import { LineChart } from 'react-native-chart-kit'
 
-const VehicleMileageChartView = ({containerStyles, months, moneySpent}) => {
-    const { width } = useWindowDimensions();
+const VehicleMileageChartView = ({containerStyles, refuels}) => {
+
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const mileagePerMonth = months.map((month, index) => {
+        const monthRefuels = refuels.filter((refuel) => {
+            const refuelDate = new Date(refuel.date);
+            return refuelDate.getMonth() === index;
+        });
+        const mileage = monthRefuels.map((refuel, index) => {
+            if (index === 0) return 0;
+            const previousRefuel = refuels[index - 1];
+            const mileage = parseInt(previousRefuel.totalKm) - parseInt(refuel.totalKm);
+            return mileage;
+        });
+        return mileage.reduce((acc, current) => acc + current, 0);
+    });
+    console.log(mileagePerMonth)
+
     const data = {
         labels: months,
         datasets: [{
-            data: moneySpent,
-            colors: [() => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c']
+            data: mileagePerMonth,
+            colors: [() => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c', () => '#ea580c']
         }]
     }
 

@@ -81,3 +81,13 @@ export const getAllRefuels = async () => {
     return [];
   }
 };
+
+export const deleteAllRefuels = async () => {
+  try {
+    await AsyncStorage.removeItem(REFUEL_STORAGE_KEY);
+    console.log('All refuel data deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting all refuel data:', error);
+  }
+};
+

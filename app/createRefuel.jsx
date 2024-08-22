@@ -12,11 +12,12 @@ const createRefuel = () => {
     const [form, setForm] = useState({
         fuel: '',
         cost: '',
+        totalKm: '',
     })
     const { vehicleSelected } = useUserStore();
 
     const addNewRefuel = () => {
-        if (!form.fuel && !form.cost) {
+        if (!form.fuel && !form.cost && !form.totalKm) {
             Alert.alert('Error', 'Please fill all fields')
         } else {
             const refuelData = {
@@ -48,6 +49,15 @@ const createRefuel = () => {
                         value={form.cost}
                         isRequired={true}
                         handleChangeText={(e) => setForm({ ...form, cost: e})}
+                        otherStyles="mt-4"
+                        keyboardType="number-pad"
+                    />
+                    <FormField
+                        title="Total KM"
+                        placeholder="Total KM on you vehicle speedometer"
+                        value={form.totalKm}
+                        isRequired={true}
+                        handleChangeText={(e) => setForm({ ...form, totalKm: e})}
                         otherStyles="mt-4"
                         keyboardType="number-pad"
                     />

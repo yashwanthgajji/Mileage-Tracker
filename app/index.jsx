@@ -5,6 +5,7 @@ import { Link, router } from 'expo-router'
 
 import { images } from '../constants'
 import CustomButton from '../components/CustomButton'
+import {deleteAllRefuels} from './data/RefuelStorage'
 
 const index = () => {
   return (
@@ -21,6 +22,11 @@ const index = () => {
           <CustomButton
             title="Sign Up"
             handlePress={ () => {router.push('/sign-up')} }
+            containerStyles="w-full mt-4"
+          />
+          <CustomButton
+            title="Delete All Refuels"
+            handlePress={ deleteAllRefuels }
             containerStyles="w-full mt-4"
           />
           <Image
