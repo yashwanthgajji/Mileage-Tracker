@@ -53,7 +53,6 @@ const SignUp = () => {
 
   const avatarArray = Object.values(avatars);
   const onAvatarSelected = (index) => {
-    console.log(index)
     setForm({ ...form, avatar: index})
     setIsAvatarSelectionScreen(false)
   }
@@ -112,7 +111,7 @@ const SignUp = () => {
                 </View>
               </View>
             ) : (
-                <View className="w-full justify-center items-center h-full px-5 my-6">
+                <View className="w-full justify-start items-center h-full px-5 my-7">
                   <Image
                     source={images.logo}
                     resizeMode='contain'

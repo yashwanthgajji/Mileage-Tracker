@@ -52,7 +52,7 @@ const Home = () => {
           onPress={() => {}}
         >
           <Image
-            source={avatars[`avatar${user.avatar ? user.avatar : 0}`]}
+            source={icons.profile}
             className="w-8 h-8"
             resizeMode='contain'
           />

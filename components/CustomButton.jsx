@@ -2,7 +2,7 @@ import { TouchableOpacity, Text, Image, View } from 'react-native'
 import React from 'react'
 import { icons } from '../constants'
 
-const CustomButton = ({title, handlePress, containerStyles, textStyles, isLoading, isRightShown}) => {
+const CustomButton = ({title, handlePress, containerStyles, textStyles, isLoading, isRightShown, isAddShown}) => {
   return (
     <TouchableOpacity
         onPress={handlePress}
@@ -14,13 +14,24 @@ const CustomButton = ({title, handlePress, containerStyles, textStyles, isLoadin
         <Text className={`text-gray-50 font-pse text-lg ${textStyles}`}>
           {title}
         </Text>
-        {isRightShown && (
-          <Image 
-            source={icons.right}
-            className="w-6 h-6"
-            resizeMode='contain'
-          />
-        )}
+        {
+          isRightShown && (
+            <Image 
+              source={icons.right}
+              className="w-6 h-6"
+              resizeMode='contain'
+            />
+          )
+        }
+        {
+          isAddShown && (
+            <Image 
+              source={icons.plus}
+              className="w-4 h-4"
+              resizeMode='contain'
+            />
+          )
+        }
       </View>
     </TouchableOpacity>
   )

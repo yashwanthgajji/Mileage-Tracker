@@ -8,6 +8,7 @@ import PassCodeField from '../../components/PassCodeField'
 import { getAllUsers } from '../data/UserStorage'
 import { images } from '../../constants'
 import { useUserStore } from '../../context/GlobalContext'
+import SignInProfile from '../../components/SignInProfile'
 
 const SignIn = () => {
   const { setUser, setIsLoggedIn } = useUserStore();
@@ -69,28 +70,28 @@ const SignIn = () => {
                 />
               </View>
             ) : (
-              <View className="w-full justify-center items-center h-full px-5 my-6">
+              <View className="w-full justify-center items-center h-full px-5 my-7">
                 <Image
                   source={images.logo}
                   resizeMode='contain'
                   className="w-[80px] h-[80px]"
                 />
-                <Text className="text-xl text-primary-800 text-semibold font-psemibold mt-10">Who are you?</Text>
-                <View className="w-full px-4 justify-center items-center flex-col">
+                <Text className="text-2xl mt-3 text-secondary-600 font-pextrabold">Mileage Tracker</Text>
+                <Text className="text-xl text-primary-800 text-semibold font-psemibold mt-20">Who are you?</Text>
+                <View className="w-full px-6 justify-center items-center flex-col">
                   {users.map((user, index) => (
-                    <CustomButton
-                      title={user.nickname}
-                      containerStyles="w-full mt-4"
+                    <SignInProfile 
+                      user={user}
                       handlePress={() => selectUser(user.id)}
                     />
                   ))}
                 </View>
                 <CustomButton
-                  title="Sign in"
-                  handlePress={ selectUser }
+                  title="Add New User"
+                  handlePress={() => {router.replace('/sign-up')}}
                   containerStyles="w-full mt-4"
+                  isAddShown
                 />
-                <Link href="/sign-up" className="text-lg font-psemibold text-secondary mt-4">Sign Up</Link>
               </View>
             )
           }

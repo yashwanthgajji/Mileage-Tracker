@@ -10,15 +10,15 @@ import { getAllUsers } from './data/UserStorage'
 import { useEffect } from 'react'
 
 const index = () => {
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     const users = await getAllUsers();
-  //     if (users.length != 0) {
-  //       router.replace('/sign-in');
-  //     }
-  //   };
-  //   fetchUsers();
-  // }, []);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const users = await getAllUsers();
+      if (users.length != 0) {
+        router.replace('/sign-in');
+      }
+    };
+    fetchUsers();
+  }, []);
 
   return (
     <SafeAreaView className="bg-background h-full">
