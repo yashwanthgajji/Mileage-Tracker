@@ -2,7 +2,7 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { images } from '../constants'
 
-const VehicleDisplay = ({ containerStyles }) => {
+const VehicleDisplay = ({ containerStyles, vehicle: {name, type, engine} }) => {
     const hasVehicleImage = true
     return (
     <View className={`w-full h-56 rounded-2xl justify-center items-center bg-white ${containerStyles}`}>
@@ -10,11 +10,24 @@ const VehicleDisplay = ({ containerStyles }) => {
         { 
             hasVehicleImage ? (
                 <View className="flex-col w-full h-full justify-center items-center bg-blue-50 rounded-xl">
-                    <Image 
-                        source={images.car}
-                        className="h-[50%] w-[50%]"
-                        resizeMode='contain'
-                    />
+                    {
+                        type == '2 Wheeler' && (
+                            <Image 
+                                source={images.bike}
+                                className="h-[50%] w-[50%]"
+                                resizeMode='contain'
+                            />
+                        )
+                    }
+                    {
+                        type == '4 Wheeler' && (
+                            <Image 
+                                source={images.car}
+                                className="h-[50%] w-[50%]"
+                                resizeMode='contain'
+                            />
+                        )
+                    }
                     <Text className="text-black-200 text-xl font-pmedium">No Image</Text>
                 </View>
             ) : (

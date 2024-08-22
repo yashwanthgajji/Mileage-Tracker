@@ -1,36 +1,31 @@
 import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
 
 import FormField from '../components/FormField'
 import CustomButton from '../components/CustomButton'
-import { SelectList } from 'react-native-dropdown-select-list'
 import { useUserStore } from '../context/GlobalContext'
-import { addVehicle } from './data/VehicleStorage'
+import { addRefuel } from './data/RefuelStorage'
 
-const createVehicle = () => {
-    const vehicleTypeListData = [
-        { key: '2 Wheeler', value: '2 Wheeler' },
-        { key: '4 Wheeler', value: '4 Wheeler' },
-    ]
+const createRefuel = () => {
     const [form, setForm] = useState({
-        name: '',
-        type: '',
-        engine: '',
+        fuel: '',
+        cost: '',
     })
-    const { user } = useUserStore();
+    const { vehicleSelected } = useUserStore();
 
-    const addNewVehicle = () => {
-        if (!form.name && !form.type && !form.engine) {
+    const addNewRefuel = () => {
+        if (!form.fuel && !form.cost) {
             Alert.alert('Error', 'Please fill all fields')
         } else {
-            const vehicleData = {
+            const refuelData = {
                 id: new Date().getTime(),
-                userId: user.id,
+                vehicleId: vehicleSelected.id,
+                date:  new Date().getTime(),
                 ...form,
             }
-            addVehicle(vehicleData)
+            addRefuel(refuelData)
             router.back()
         }
     }
@@ -41,30 +36,20 @@ const createVehicle = () => {
                 <View className="w-full justify-center items-center h-full px-5 my-6">
                     <Text className="text-2xl text-primary-800 text-semibold font-psemibold mt-4">Add New Vehicle</Text>
                     <FormField
-                        title="Vehicle Name"
-                        value={form.name}
+                        title="Fuel Added"
+                        value={form.fuel}
                         isRequired={true}
-                        handleChangeText={(e) => setForm({ ...form, name: e})}
+                        handleChangeText={(e) => setForm({ ...form, fuel: e})}
                         otherStyles="mt-4"
-                    />
-                    <SelectList
-                        setSelected={(val) => setForm({ ...form, type: val})}
-                        data={vehicleTypeListData}
-                        save="value"
-                        placeholder="Select Vehicle Type"
-                        boxStyles={{width:360, marginTop: 24}}
-                        maxHeight={80}
-                        dropdownItemStyles={{padding: 20}}
-                        dropdownStyles={{backgroundColor: '#bfdbfe'}}
-                        dropdownTextStyles={{color: '#1E1E2D'}}
-                        notFoundText='No Vehicle Found'
+                        keyboardType="number-pad"
                     />
                     <FormField
-                        title="Engine CC"
-                        value={form.engine}
+                        title="Cost"
+                        value={form.cost}
                         isRequired={true}
-                        handleChangeText={(e) => setForm({ ...form, engine: e})}
+                        handleChangeText={(e) => setForm({ ...form, cost: e})}
                         otherStyles="mt-4"
+                        keyboardType="number-pad"
                     />
                     <View className="w-full flex-row mt-4">
                         <CustomButton
@@ -74,7 +59,7 @@ const createVehicle = () => {
                         />
                         <CustomButton
                             title="Add"
-                            handlePress={addNewVehicle}
+                            handlePress={addNewRefuel}
                             containerStyles="mt-2 flex-1 mx-2"
                         />
                     </View>
@@ -84,4 +69,4 @@ const createVehicle = () => {
     )
 }
 
-export default createVehicle
+export default createRefuel

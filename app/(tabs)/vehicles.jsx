@@ -18,7 +18,6 @@ const Vehicles = () => {
     };
     fetchVehicles();
   }, []);
-  console.log(vehicles)
 
   return (
     <SafeAreaView className="bg-background h-full">

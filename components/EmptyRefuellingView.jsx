@@ -3,6 +3,7 @@ import React from 'react'
 import { images } from '../constants'
 
 import CustomButton from '../components/CustomButton'
+import { router } from 'expo-router'
 
 const EmptyRefuellingView = ({ containerStyles }) => {
   return (
@@ -15,7 +16,7 @@ const EmptyRefuellingView = ({ containerStyles }) => {
       <Text className="text-xl font-pregular text-primary-800 text-center px-4">It's time to add the refuelling details to get more insights</Text>
       <CustomButton
         title="Add Refuelling"
-        handlePress={() => {}}
+        handlePress={() => {router.push('/createRefuel')}}
         containerStyles="mt-7 w-[216px]"
         isRightShown = {true}
       />

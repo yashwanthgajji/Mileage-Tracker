@@ -11,7 +11,6 @@ export const addVehicle = async (vehicle) => {
     }
     vehicles.push(vehicle);
     await AsyncStorage.setItem(VEHICLE_STORAGE_KEY, JSON.stringify(vehicles));
-    console.log(vehicles);
     console.log('Vehicle added successfully!');
   } catch (error) {
     console.error('Error adding vehicle:', error);

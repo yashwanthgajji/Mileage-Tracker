@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity, Picker } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import {icons, images} from '../../constants'
@@ -11,24 +11,35 @@ import FuelInsightsView from '../../components/FuelInsightsView'
 import MoneySpendChartView from '../../components/MoneySpendChartView'
 import VehicleMileageChartView from '../../components/VehicleMileageChartView'
 import { useUserStore } from '../../context/GlobalContext'
+import { getAllVehiclesByUserId } from '../data/VehicleStorage'
+import { getTop5RefuelsByVehicleId, getAllRefuelsByVehicleId } from '../data/RefuelStorage'
 
 const Home = () => {
-  const { user } = useUserStore();
-  const [vehicleSelected, setVehicleSelected] = useState('')
+  const { user, vehicleSelected, setVehicleSelected } = useUserStore();
+  const [vehicles, setVehicles] = useState([])
+  const [vehicleListData, setVehicleListData] = useState([]);
+  const [refuels, setRefuels] = useState([])
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      const vehicles = await getAllVehiclesByUserId(user.id);
+      setVehicles(vehicles)
+      const vehicleListData = vehicles.map((vehicle) => ({
+        key: vehicle.id,
+        value: vehicle.name,
+      }));
+      setVehicleListData(vehicleListData);
+    };
+    fetchVehicles();
+  }, []);
 
-  posts = [{id: 1}, {id: 2}]
-  const data = [
-    { key: '1', value: 'Java' },
-    { key: '2', value: 'JavaScript' },
-    { key: '3', value: 'Python' },
-  ];
-  const refuels = [
-    { date: "Wed, 22 Dec'23", fuel: "2.5L", cost: "+Rs:150.54" },
-    { date: "Fri, 1 Feb'24", fuel: "1L", cost: "+Rs:90.24" },
-    { date: "Sun, 15 Apr'24", fuel: "3.1L", cost: "+Rs:300" },
-    { date: "Fri, 1 Feb'24", fuel: "1L", cost: "+Rs:90.24" },
-    { date: "Sun, 15 Apr'24", fuel: "3.1L", cost: "+Rs:300" },
-  ]
+  const setVehicleValue = async (val) => {
+    console.log(val)
+    const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
+    setVehicleSelected(selectedVehicle);
+    const refuels = await getTop5RefuelsByVehicleId(val);
+    setRefuels(refuels);
+    console.log(refuels);
+  }
   // const refuels= []
 
   return (
@@ -52,13 +63,13 @@ const Home = () => {
         />
         <Text className="font-pbold text-3xl text-secondary-600 mt-4">Hi, {user.nickname}</Text>
         {
-          posts.length != 0 ? (
+          vehicles.length != 0 ? (
             <View className="w-full justify-center items-center mt-2">
               <Text className="text-xl font-pregular text-primary-800 text-center px-6">Here is everything about your</Text>
               <SelectList
-                setSelected={(val) => setVehicleSelected(val)}
-                data={data}
-                save="value"
+                setSelected={(val) => setVehicleValue(val)}
+                data={vehicleListData}
+                save="key"
                 placeholder="Select a vehicle"
                 boxStyles={{width:360, marginTop: 24}}
                 maxHeight={120}
@@ -66,37 +77,45 @@ const Home = () => {
                 dropdownStyles={{backgroundColor: '#bfdbfe'}}
                 dropdownTextStyles={{color: '#1E1E2D'}}
                 notFoundText='No Vehicle Found'
+                defaultOption={{ key: vehicleSelected?.id, value: vehicleSelected?.name }}
               />
-              <VehicleDisplay 
-                containerStyles = "mt-4"
-              />
-              {
-                refuels.length == 0 ? (
-                  <EmptyRefuellingView/>
-                ) : (
-                  <View>
-                    <FuelInsightsView 
-                      containerStyles="mt-7"
-                      avgFuel={"25 km/L"}
-                      lastFuel={"20 km/L"}
-                    />
-                    <MoneySpendChartView
-                      containerStyles="mt-7"
-                      months={["January", "February", "March", "April", "May"]}
-                      moneySpent={[2000, 1400, 3400, 1800, 2000]}
-                    />
-                    <VehicleMileageChartView
-                      containerStyles="mt-7"
-                      months={["January", "February", "March", "April", "May"]}
-                      moneySpent={[15, 20, 32, 12, 20]}
-                    />
-                    <RefuellingList 
-                      containerStyles="mt-7 mb-4"
-                      refuels={refuels}
-                    />
-                  </View>
-                )
-              }
+              {vehicleSelected ? (
+                <View className="w-full justify-center items-center mt-2">
+                  <VehicleDisplay 
+                    containerStyles = "mt-4"
+                    vehicle={vehicleSelected}
+                  />
+                  {
+                    refuels.length == 0 ? (
+                      <EmptyRefuellingView/>
+                    ) : (
+                      <View>
+                        <FuelInsightsView 
+                          containerStyles="mt-7"
+                          avgFuel={"25 km/L"}
+                          lastFuel={"20 km/L"}
+                        />
+                        <MoneySpendChartView
+                          containerStyles="mt-7"
+                          months={["January", "February", "March", "April", "May"]}
+                          moneySpent={[2000, 1400, 3400, 1800, 2000]}
+                        />
+                        <VehicleMileageChartView
+                          containerStyles="mt-7"
+                          months={["January", "February", "March", "April", "May"]}
+                          moneySpent={[15, 20, 32, 12, 20]}
+                        />
+                        <RefuellingList 
+                          containerStyles="mt-7 mb-4"
+                          refuels={refuels}
+                        />
+                      </View>
+                    )
+                  }
+                </View>
+              ) : (
+                <View></View>
+              )}
             </View>
           ) : (
             <View className="w-full justify-center items-center mt-2">
