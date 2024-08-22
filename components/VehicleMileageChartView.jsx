@@ -18,7 +18,6 @@ const VehicleMileageChartView = ({containerStyles, refuels}) => {
         });
         return mileage.reduce((acc, current) => acc + current, 0);
     });
-    console.log(mileagePerMonth)
 
     const data = {
         labels: months,

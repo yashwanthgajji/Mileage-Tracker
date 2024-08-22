@@ -12,7 +12,6 @@ const MoneySpendChartView = ({containerStyles, refuels}) => {
         const totalCost = refuelsInMonth.reduce((acc, refuel) => acc + parseInt(refuel.cost, 10), 0);
         return totalCost / 1000;
     });
-    console.log(moneySpent)
     
     const data = {
         labels: months,

@@ -5,6 +5,7 @@ import home from '../assets/icons/home.png'
 import performance from '../assets/icons/performance.png'
 import plus from '../assets/icons/plus.png'
 import right from '../assets/icons/right.png'
+import upload from '../assets/icons/upload.png'
 
 export default {
   profile,
@@ -14,4 +15,5 @@ export default {
   performance,
   plus,
   right,
+  upload,
 };

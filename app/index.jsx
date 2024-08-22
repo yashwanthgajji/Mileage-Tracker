@@ -6,8 +6,20 @@ import { Link, router } from 'expo-router'
 import { images } from '../constants'
 import CustomButton from '../components/CustomButton'
 import {deleteAllRefuels} from './data/RefuelStorage'
+import { getAllUsers } from './data/UserStorage'
+import { useEffect } from 'react'
 
 const index = () => {
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     const users = await getAllUsers();
+  //     if (users.length != 0) {
+  //       router.replace('/sign-in');
+  //     }
+  //   };
+  //   fetchUsers();
+  // }, []);
+
   return (
     <SafeAreaView className="bg-background h-full">
       <ScrollView contentContainerStyle={{height: '100%'}}>
@@ -24,11 +36,11 @@ const index = () => {
             handlePress={ () => {router.push('/sign-up')} }
             containerStyles="w-full mt-4"
           />
-          <CustomButton
+          {/* <CustomButton
             title="Delete All Refuels"
             handlePress={ deleteAllRefuels }
             containerStyles="w-full mt-4"
-          />
+          /> */}
           <Image
             source={images.homeImage}
             resizeMode='contain'

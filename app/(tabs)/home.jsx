@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity
 import React, { useEffect, useState } from 'react'
 
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
-import {icons, images} from '../../constants'
+import {icons, images, avatars} from '../../constants'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { SelectList } from 'react-native-dropdown-select-list'
 import VehicleDisplay from '../../components/VehicleDisplay'
@@ -52,8 +52,8 @@ const Home = () => {
           onPress={() => {}}
         >
           <Image
-            source={icons.profile}
-            className="w-6 h-6"
+            source={avatars[`avatar${user.avatar ? user.avatar : 0}`]}
+            className="w-8 h-8"
             resizeMode='contain'
           />
         </TouchableOpacity>
