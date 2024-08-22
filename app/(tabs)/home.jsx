@@ -13,6 +13,7 @@ import VehicleMileageChartView from '../../components/VehicleMileageChartView'
 import { useUserStore } from '../../context/GlobalContext'
 import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { getTop5RefuelsByVehicleId, getAllRefuelsByVehicleId } from '../data/RefuelStorage'
+import { router } from 'expo-router'
 
 const Home = () => {
   const { user, vehicleSelected, setVehicleSelected } = useUserStore();
@@ -49,7 +50,7 @@ const Home = () => {
       <View className="w-full justify-center items-center h-full px-5 my-10">
         <TouchableOpacity
           className="w-full items-start"
-          onPress={() => {}}
+          onPress={() => {router.push('/profile')}}
         >
           <Image
             source={icons.profile}

@@ -54,7 +54,7 @@ const createRefuel = () => {
                     />
                     <FormField
                         title="Total KM"
-                        placeholder="Total KM on you vehicle speedometer"
+                        subtitle="Total KM on you vehicle speedometer"
                         value={form.totalKm}
                         isRequired={true}
                         handleChangeText={(e) => setForm({ ...form, totalKm: e})}

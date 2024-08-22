@@ -1,6 +1,6 @@
 import { View, Text, TextInput } from 'react-native'
 
-const FormField = ({ title, value, placeholder, isRequired, handleChangeText, otherStyles, keyboardType }) => {
+const FormField = ({ title, subtitle, value, placeholder, isRequired, handleChangeText, otherStyles, keyboardType }) => {
     return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-lg text-primary-800 font-pregular">
@@ -9,6 +9,13 @@ const FormField = ({ title, value, placeholder, isRequired, handleChangeText, ot
           <Text className=" text-base text-red-600 font-plight">*</Text>
         )}
       </Text>
+      {
+        subtitle && (
+          <Text className="text-sm text-gray-600 font-plight">
+            {subtitle}
+          </Text>
+        )
+      }
       <View
         className="border-2 border-black w-full h-16 px-4 bg-background-200 rounded-2xl focus:border-secondary items-center flex-row"
       >
