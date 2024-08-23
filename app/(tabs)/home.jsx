@@ -1,8 +1,8 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity, Picker, RefreshControl } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
-import {icons, images, avatars} from '../../constants'
+import {icons, images} from '../../constants'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { SelectList } from 'react-native-dropdown-select-list'
 import VehicleDisplay from '../../components/VehicleDisplay'

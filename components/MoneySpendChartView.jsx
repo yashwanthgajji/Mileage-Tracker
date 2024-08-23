@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { BarChart } from 'react-native-chart-kit'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const MoneySpendChartView = ({containerStyles, refuels}) => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

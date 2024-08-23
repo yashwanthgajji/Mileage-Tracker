@@ -1,7 +1,6 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import RefuellingItemView from './RefuellingItemView'
-import { TouchableOpacity } from 'react-native'
 import { Link, router } from 'expo-router'
 
 const RefuellingList = ({containerStyles, refuels}) => {

@@ -1,50 +1,57 @@
-# Welcome to your Expo app 👋
+# Mileage Tracker 
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Autor**: Yashwanth Gajji
 
-## Get started
+## About
 
-1. Install dependencies
+An application that allows users to track enter and track their vehicle refuelling data and see mileage performance of their vehicles. Dynamic visualization of mileage performance and money spent on refuelling the vehicle can be seen.
 
+## Features
+- User can sign up into application and see his profile on sign in page.
+- User can login to his profile using a passcode.
+- User can add and edit vehicle details.
+- User can add and edit refuelling data for each vehicle.
+- All Refuel data for each vehicle is displayed in Refuelling tab.
+- User can see mileage performance of each vehicle in Perormance tab.
+- User can see all his added vehicles in Vehicles tab.
+- While adding a new vehicle, user can choose a picture for the vehicle.
+- All data is stored in Async Storage (local storage).
+- Zustand is used for Global State Management.
+
+## Technologies Used
+- React Native
+- Expo
+- NativeWind
+- AysncStorage
+- Zustand
+
+## Other Libraries Used
+- react-native-chart-kit
+- expo-image-picker
+- @react-native-async-storage/async-storage
+- zustand
+- react-native-otp-textinput
+- react-native-dropdown-select-list
+
+## Geting started
+
+1. Download the Zip or  Clone the repository.
+
+2. Install dependencies
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Run the Application
    ```bash
     npx expo start
    ```
 
 In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Expo Go](https://expo.dev/go), Easy and Preferable way
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Demo
 
-## Get a fresh project
+## Screenshots
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

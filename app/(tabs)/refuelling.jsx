@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView, RefreshControl } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView, RefreshControl, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import RefuellingItemView from '../../components/RefuellingItemView'
 import { SelectList } from 'react-native-dropdown-select-list'
@@ -9,7 +9,6 @@ import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { getAllRefuelsByVehicleId } from '../data/RefuelStorage'
 import { router } from 'expo-router'
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
-import { TouchableOpacity } from 'react-native'
 
 const Refuelling = () => {
   const { user, vehicleSelected, setVehicleSelected, setRefuelForEdit } = useUserStore();
