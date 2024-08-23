@@ -47,8 +47,6 @@ In the output, you'll find options to open the app in a
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 
-## Demo
-
 ## Screenshots
 ### Authentication Screens
 <img src="screenshots/auth/splash.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/index.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/signup1.jpg" width="200">
@@ -58,10 +56,9 @@ In the output, you'll find options to open the app in a
 <img src="screenshots/auth/passcode.jpg" width="200">
 
 ### Home Screeens
-<img src="screenshots/home/home1.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home2.jpg" width="200">
+<img src="screenshots/home/home1.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home2.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home3.jpg" width="200">
 
-
-<img src="screenshots/home/home3.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/profile.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home4.jpg" width="200">
+<img src="screenshots/home/home4.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/profile.jpg" width="200">
 
 ### Refuel and Performance Screens
 <img src="screenshots/refuel/refuelling1.jpg" width="200">&emsp;&emsp;<img src="screenshots/refuel/refuelling2.jpg" width="200">&emsp;&emsp;<img src="screenshots/refuel/refuelling3.jpg" width="200">
