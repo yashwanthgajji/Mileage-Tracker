@@ -25,7 +25,7 @@ export const getVehicleById = async (id) => {
     if (vehiclesString) {
       vehicles = JSON.parse(vehiclesString);
       const vehicle = vehicles.find((vehicle) => vehicle.id === id);
-      return vehicle;
+      return vehicle || null;
     } else {
       return null;
     }

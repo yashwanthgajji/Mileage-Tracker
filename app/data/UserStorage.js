@@ -25,7 +25,7 @@ export const getUserById = async (id) => {
         if (usersString) {
             users = JSON.parse(usersString);
             const user = users.find((user) => user.id === id);
-            return user
+            return user || null;
         } else {
             return null
         }
@@ -46,6 +46,6 @@ export const getAllUsers = async () => {
         }
     } catch (error) {
         console.error('Error getting all users:', error);
-      return [];
+        return [];
     }
 };
