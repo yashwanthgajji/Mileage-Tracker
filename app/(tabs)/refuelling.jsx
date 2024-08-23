@@ -45,15 +45,6 @@ const Refuelling = () => {
     // console.log(refuels)
   }
 
-  const [refuelsRefreshing, setRefuelsRefreshing] = useState(false)
-  const onRefuelsRefresh = async () => {
-    if (vehicleSelected) {
-      setRefuelsRefreshing(true)
-      await getLatestRefuels(vehicleSelected.id)
-      setRefuelsRefreshing(false)
-    }
-  }
-
   const setVehicleValue = async (val) => {
     // console.log(val)
     const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
@@ -137,8 +128,8 @@ const Refuelling = () => {
                       )}
                       refreshControl={
                         <RefreshControl
-                          refreshing={refuelsRefreshing}
-                          onRefresh={onRefuelsRefresh}
+                          refreshing={vehiclesRefreshing}
+                          onRefresh={onVehiclesRefresh}
                         />
                       }
                     />

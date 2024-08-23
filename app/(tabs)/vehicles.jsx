@@ -54,13 +54,14 @@ const Vehicles = () => {
               <FlatList
                 className="mt-7 mb-36"
                 data={vehicles}
-                keyExtractor={(item) => {item.$id}}
+                keyExtractor={(item) => {item.id.toString()}}
                 renderItem={({item}) => (
                   <TouchableOpacity
                     onPress={() => {editVehicle(item)}}
                   >
                     <View className="w-full">
                       <VehicleCard 
+                        key={item.id}
                         vehicle={item}
                       />
                     </View>

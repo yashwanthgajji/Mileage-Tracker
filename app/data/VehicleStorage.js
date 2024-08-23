@@ -88,3 +88,28 @@ export const updateVehicle = async (vehicleId, updatedVehicle) => {
     console.error('Error updating vehicle:', error);
   }
 };
+
+export const deleteVehicleById = async (id) => {
+  try {
+    const vehiclesString = await AsyncStorage.getItem(VEHICLE_STORAGE_KEY);
+    if (vehiclesString) {
+      let vehicles = JSON.parse(vehiclesString);
+      const index = vehicles.findIndex((vehicle) => vehicle.id === id);
+      if (index !== -1) {
+        vehicles.splice(index, 1);
+        await AsyncStorage.setItem(VEHICLE_STORAGE_KEY, JSON.stringify(vehicles));
+        console.log('Vehicle deleted successfully!');
+        return true;
+      } else {
+        console.error('Vehicle not found');
+        return false;
+      }
+    } else {
+      console.error('No vehicles found');
+      return false;
+    }
+  } catch (error) {
+    console.error('Error deleting vehicle:', error);
+    return false;
+  }
+};

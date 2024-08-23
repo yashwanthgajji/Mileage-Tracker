@@ -1,4 +1,4 @@
-import { addVehicle, getAllVehicles, getAllVehiclesByUserId, getVehicleById, updateVehicle } from '../data/VehicleStorage';
+import { addVehicle, getAllVehicles, getAllVehiclesByUserId, getVehicleById, updateVehicle, deleteVehicleById } from '../data/VehicleStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -133,6 +133,44 @@ describe('Vehicle Storage', () => {
             const updatedVehicle = { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 };
             const result = await updateVehicle(1, updatedVehicle);
             expect(result).toBeNull();
+        });
+    });
+
+    describe('deleteVehicleById', () => {
+        it('deletes a vehicle by ID', async () => {
+            const vehicles = [
+                { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 },
+                { id: 2, userId: 1, name: 'RX100', type: '2 Wheeler', engine: 300 },
+            ];
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify(vehicles));
+            await deleteVehicleById(1);
+            expect(AsyncStorage.setItem).toHaveBeenCalledTimes(1);
+            expect(AsyncStorage.setItem).toHaveBeenCalledWith('VEHICLES', JSON.stringify([vehicles[1]]));
+        });
+      
+        it('returns true if vehicle is deleted successfully', async () => {
+            const vehicles = [
+                { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 },
+                { id: 2, userId: 1, name: 'RX100', type: '2 Wheeler', engine: 300 },
+            ];
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify(vehicles));
+            const result = await deleteVehicleById(1);
+            expect(result).toBe(true);
+        });
+      
+        it('returns false if no vehicle with the matching ID is found', async () => {
+            const vehicles = [
+                { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 },
+            ];
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify(vehicles));
+            const result = await deleteVehicleById(2);
+            expect(result).toBe(false);
+        });
+      
+        it('returns false if storage is empty', async () => {
+            AsyncStorage.getItem.mockResolvedValue(null);
+            const result = await deleteVehicleById(1);
+            expect(result).toBe(false);
         });
     });
 });

@@ -94,6 +94,7 @@ const SignIn = () => {
                 <View className="w-full px-6 justify-center items-center flex-col">
                   {users.map((user, index) => (
                     <SignInProfile 
+                      key={index}
                       user={user}
                       handlePress={() => selectUser(user.id)}
                     />

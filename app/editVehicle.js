@@ -8,7 +8,7 @@ import FormField from '../components/FormField'
 import CustomButton from '../components/CustomButton'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { useUserStore } from '../context/GlobalContext'
-import { updateVehicle } from './data/VehicleStorage'
+import { updateVehicle, deleteVehicleById } from './data/VehicleStorage'
 import { TouchableOpacity } from 'react-native'
 import { icons } from '../constants'
 
@@ -43,11 +43,44 @@ const editVehicle = () => {
         }
     }
 
+    const VehicleDelete = () => {
+        Alert.alert(
+            'Delete Vehicle',
+            'Are you sure you want to delete this vehicle?',
+            [
+                {
+                    text: 'No',
+                    onPress: () => {},
+                },
+                {
+                    text: 'Yes',
+                    onPress: () => {
+                        deleteVehicleById(updatedVehicle.id)
+                        setVehicleForEdit(null);
+                        router.back();
+                    },
+                },
+            ],
+            { cancelable: false },
+        );
+    }
+
     return (
         <SafeAreaView className="bg-background h-full">
             <ScrollView>
                 <View className="w-full justify-center items-center h-full px-5 my-6">
-                    <Text className="text-2xl text-primary-800 text-semibold font-psemibold mt-4">Edit Vehicle</Text>
+                    <View className="flex-row w-full mt-4">
+                        <Text className="text-2xl text-primary-800 text-semibold font-psemibold flex-1">Edit Vehicle</Text>
+                        <TouchableOpacity
+                            onPress={VehicleDelete}
+                        >
+                            <Image
+                                source={icons.bin}
+                                className="w-7 h-7"
+                                resizeMode='contain'
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <TouchableOpacity
                         className="mt-7 w-full"
                         onPress={() => openPicker()}
@@ -56,7 +89,7 @@ const editVehicle = () => {
                         <View className="w-full h-60 p-1 bg-white rounded-xl justify-center items-center">
                         <Image 
                             source={{uri: updatedVehicle.picture.uri}}
-                            className="w-full h-full"
+                            className="w-full h-full rounded-lg"
                             resizeMode='cover'
                         />
                         </View>
