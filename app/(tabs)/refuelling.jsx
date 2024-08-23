@@ -1,7 +1,6 @@
 import { View, Text, SafeAreaView, FlatList, ScrollView, RefreshControl, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import RefuellingItemView from '../../components/RefuellingItemView'
-import { SelectList } from 'react-native-dropdown-select-list'
 import CustomButton from '../../components/CustomButton'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import { useUserStore } from '../../context/GlobalContext'
@@ -9,6 +8,7 @@ import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { getAllRefuelsByVehicleId } from '../data/RefuelStorage'
 import { router } from 'expo-router'
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
+import SelectDropDown from '../../components/SelectDropDown'
 
 const Refuelling = () => {
   const { user, vehicleSelected, setVehicleSelected, setRefuelForEdit } = useUserStore();
@@ -77,18 +77,14 @@ const Refuelling = () => {
             </ScrollView>
           ) : (
             <View className="w-full h-full justify-start items-center">
-              <SelectList
-                setSelected={(val) => setVehicleValue(val)}
+              <SelectDropDown
+                setValue={setVehicleValue}
                 data={vehicleListData}
-                save="key"
+                save={"key"}
                 placeholder="Select a vehicle"
-                boxStyles={{width:360, marginTop: 24}}
-                maxHeight={120}
-                dropdownItemStyles={{padding: 20}}
-                dropdownStyles={{backgroundColor: '#bfdbfe'}}
-                dropdownTextStyles={{color: '#1E1E2D'}}
                 notFoundText='No Vehicle Found'
                 defaultOption={{ key: vehicleSelected?.id, value: vehicleSelected?.name }}
+                containerStyles="mt-6"
               />
               {
                 refuels.length == 0 ? (

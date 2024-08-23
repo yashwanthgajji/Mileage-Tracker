@@ -106,7 +106,7 @@ const SignIn = () => {
                   containerStyles="w-full mt-4"
                   isAddShown
                 />
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   className="mt-24 w-full rounded-full items-end"
                   onPress={deleteAllStorage}
                 >
@@ -118,7 +118,7 @@ const SignIn = () => {
                     />
                     <Text className="text-secondary-800 text-xs font-pextralight">Delete all data</Text>
                   </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             )
           }

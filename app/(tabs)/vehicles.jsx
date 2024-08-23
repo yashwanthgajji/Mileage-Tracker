@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { router } from 'expo-router'
 
@@ -40,9 +40,18 @@ const Vehicles = () => {
         <Text className="text-2xl text-start w-full mt-7 text-primary-800 font-psemibold">Vehicles</Text>
         {
           vehicles.length == 0 ? (
-            <EmptyVehicleListView
-              containerStyles="mt-24"
-            />
+            <ScrollView
+              refreshControl={
+                <RefreshControl 
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                />
+              }
+            >
+              <EmptyVehicleListView
+                containerStyles="mt-24"
+              />
+            </ScrollView>
           ) : (
             <View className="w-full justify-center items-center">
               <CustomButton

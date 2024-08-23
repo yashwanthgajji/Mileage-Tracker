@@ -1,6 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { SelectList } from 'react-native-dropdown-select-list'
 import MoneySpendChartView from '../../components/MoneySpendChartView'
 import VehicleMileageChartView from '../../components/VehicleMileageChartView'
 import FuelInsightsView from '../../components/FuelInsightsView'
@@ -9,6 +8,7 @@ import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { getAllRefuelsByVehicleId } from '../data/RefuelStorage'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
+import SelectDropDown from '../../components/SelectDropDown'
 
 const Performance = () => {
   const { user, vehicleSelected, setVehicleSelected } = useUserStore();
@@ -65,18 +65,14 @@ const Performance = () => {
               />
             ) : (
               <View className="w-full flex flex-col items-center justify-center">
-                <SelectList
-                  setSelected={(val) => setVehicleValue(val)}
+                <SelectDropDown
+                  setValue={setVehicleValue}
                   data={vehicleListData}
-                  save="key"
-                  placeholder="Select a vehicle"
-                  boxStyles={{width:360, marginTop: 24}}
-                  maxHeight={120}
-                  dropdownItemStyles={{padding: 20}}
-                  dropdownStyles={{backgroundColor: '#bfdbfe'}}
-                  dropdownTextStyles={{color: '#1E1E2D'}}
-                  notFoundText='No Vehicle Found'
+                  save={"key"}
+                  placeholder={"Select a vehicle"}
+                  notFoundText={"No Vehicle Found"}
                   defaultOption={{ key: vehicleSelected?.id, value: vehicleSelected?.name }}
+                  containerStyles="mt-6"
                 />
                 {
                   refuels.length == 0 ? (

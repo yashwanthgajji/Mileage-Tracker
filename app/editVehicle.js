@@ -6,11 +6,11 @@ import * as ImagePicker from 'expo-image-picker'
 
 import FormField from '../components/FormField'
 import CustomButton from '../components/CustomButton'
-import { SelectList } from 'react-native-dropdown-select-list'
 import { useUserStore } from '../context/GlobalContext'
 import { updateVehicle, deleteVehicleById } from './data/VehicleStorage'
 import { TouchableOpacity } from 'react-native'
 import { icons } from '../constants'
+import SelectDropDown from '../components/SelectDropDown'
 
 const editVehicle = () => {
     const vehicleTypeListData = [
@@ -112,17 +112,15 @@ const editVehicle = () => {
                         handleChangeText={(e) => setUpdatedVehicle({ ...updatedVehicle, name: e})}
                         otherStyles="mt-4"
                     />
-                    <SelectList
-                        setSelected={(val) => setUpdatedVehicle({ ...updatedVehicle, type: val})}
+                    <SelectDropDown
+                        title="Vehicle Type"
+                        isRequired
+                        setValue={(val) => setUpdatedVehicle({ ...updatedVehicle, type: val})}
                         data={vehicleTypeListData}
-                        save="value"
-                        placeholder="Select Vehicle Type"
-                        boxStyles={{width:360, marginTop: 24}}
-                        maxHeight={80}
-                        dropdownItemStyles={{padding: 20}}
-                        dropdownStyles={{backgroundColor: '#bfdbfe'}}
-                        dropdownTextStyles={{color: '#1E1E2D'}}
-                        notFoundText='No Vehicle Found'
+                        save={"value"}
+                        placeholder={"Select Vehicle Type"}
+                        notFoundText={"No Vehicle Found"}
+                        containerStyles="mt-6"
                         defaultOption={{ key: updatedVehicle?.type, value: updatedVehicle?.type }}
                     />
                     <FormField
@@ -131,6 +129,7 @@ const editVehicle = () => {
                         isRequired={true}
                         handleChangeText={(e) => setUpdatedVehicle({ ...updatedVehicle, engine: e})}
                         otherStyles="mt-4"
+                        keyboardType="number-pad"
                     />
                     <View className="w-full flex-row mt-4">
                         <CustomButton

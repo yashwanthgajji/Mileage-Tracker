@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import {icons, images} from '../../constants'
 import EmptyRefuellingView from '../../components/EmptyRefuellingView'
-import { SelectList } from 'react-native-dropdown-select-list'
 import VehicleDisplay from '../../components/VehicleDisplay'
 import RefuellingList from '../../components/RefuellingList'
 import FuelInsightsView from '../../components/FuelInsightsView'
@@ -14,6 +13,7 @@ import { useUserStore } from '../../context/GlobalContext'
 import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { getTop5RefuelsByVehicleId, getAllRefuelsByVehicleId } from '../data/RefuelStorage'
 import { router } from 'expo-router'
+import SelectDropDown from '../../components/SelectDropDown'
 
 const Home = () => {
   const { user, vehicleSelected, setVehicleSelected } = useUserStore();
@@ -83,18 +83,14 @@ const Home = () => {
           vehicles.length != 0 ? (
             <View className="w-full justify-center items-center mt-2">
               <Text className="text-xl font-pregular text-primary-800 text-center px-6">Here is everything about your</Text>
-              <SelectList
-                setSelected={(val) => setVehicleValue(val)}
+              <SelectDropDown
+                setValue={setVehicleValue}
                 data={vehicleListData}
-                save="key"
-                placeholder="Select a vehicle"
-                boxStyles={{width:360, marginTop: 24}}
-                maxHeight={120}
-                dropdownItemStyles={{padding: 20}}
-                dropdownStyles={{backgroundColor: '#bfdbfe'}}
-                dropdownTextStyles={{color: '#1E1E2D'}}
-                notFoundText='No Vehicle Found'
+                save={"key"}
+                placeholder={"Select a vehicle"}
+                notFoundText={"No Vehicle Found"}
                 defaultOption={{ key: vehicleSelected?.id, value: vehicleSelected?.name }}
+                containerStyles="mt-6"
               />
               {vehicleSelected ? (
                 <View className="w-full justify-center items-center mt-2">
@@ -136,7 +132,7 @@ const Home = () => {
                     className="h-20 w-20"
                     resizeMode='contain'
                   />
-                  <Text className="text-lg font-pmedium text-secondary-600 text-center" numberOfLines={2}>Select a vehicle to view its data</Text>
+                  <Text className="text-lg font-pmedium text-secondary-600 text-center mx-12" numberOfLines={2}>Select a vehicle from your garage to view its data</Text>
                 </View>
               )}
             </View>
