@@ -2,15 +2,14 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { images } from '../constants'
 
-const VehicleCard = ({ containerStyles, vehicle: {name, type, engine} }) => {
-    const hasVehicleImage = false
+const VehicleCard = ({ containerStyles, vehicle: {picture, name, type, engine} }) => {
     return (
     <View className="w-[356px] h-60 rounded-2xl my-3 justify-start items-center bg-orange-100 flex-col">
         <View className="w-full flex-1">
         { 
-            hasVehicleImage ? (
+            picture ? (
                 <Image 
-                    source={images.royalenfield} 
+                    source={{uri: picture.uri}} 
                     className="h-full w-full rounded-2xl"
                     resizeMode='cover'
                 />

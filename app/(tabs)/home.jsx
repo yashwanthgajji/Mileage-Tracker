@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity, Picker } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView, Image, TouchableOpacity, Picker, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
@@ -21,18 +21,26 @@ const Home = () => {
   const [vehicleListData, setVehicleListData] = useState([]);
   const [refuels, setRefuels] = useState([])
   const [top5Refuels, setTop5Refuels] = useState([])
+  
+  const fetchVehicles = async () => {
+    const vehicles = await getAllVehiclesByUserId(user.id);
+    setVehicles(vehicles)
+    const vehicleListData = vehicles.map((vehicle) => ({
+      key: vehicle.id,
+      value: vehicle.name,
+    }));
+    setVehicleListData(vehicleListData);
+  };
   useEffect(() => {
-    const fetchVehicles = async () => {
-      const vehicles = await getAllVehiclesByUserId(user.id);
-      setVehicles(vehicles)
-      const vehicleListData = vehicles.map((vehicle) => ({
-        key: vehicle.id,
-        value: vehicle.name,
-      }));
-      setVehicleListData(vehicleListData);
-    };
     fetchVehicles();
   }, []);
+
+  const [refreshing, setRefreshing] = useState(false)
+  const onRefresh = async () => {
+    setRefreshing(true)
+    await fetchVehicles()
+    setRefreshing(false)
+  }
 
   const setVehicleValue = async (val) => {
     const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
@@ -42,11 +50,17 @@ const Home = () => {
     setRefuels(refuels);
     setTop5Refuels(top5Refuels);
   }
-  // const refuels= []
 
   return (
     <SafeAreaView className="bg-background h-full">
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl 
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
       <View className="w-full justify-center items-center h-full px-5 my-10">
         <TouchableOpacity
           className="w-full items-start"

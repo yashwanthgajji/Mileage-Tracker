@@ -7,17 +7,26 @@ import CustomButton from '../../components/CustomButton'
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import { useUserStore } from '../../context/GlobalContext'
 import { getAllVehiclesByUserId } from '../data/VehicleStorage'
+import { RefreshControl } from 'react-native'
 
 const Vehicles = () => {
   const { user } = useUserStore();
   const [vehicles, setVehicles] = useState([])
+  
+  const fetchVehicles = async () => {
+    const vehicles = await getAllVehiclesByUserId(user.id);
+    setVehicles(vehicles)
+  };
   useEffect(() => {
-    const fetchVehicles = async () => {
-      const vehicles = await getAllVehiclesByUserId(user.id);
-      setVehicles(vehicles)
-    };
     fetchVehicles();
   }, []);
+
+  const [refreshing, setRefreshing] = useState(false)
+  const onRefresh = async () => {
+    setRefreshing(true)
+    await fetchVehicles()
+    setRefreshing(false)
+  }
 
   return (
     <SafeAreaView className="bg-background h-full">
@@ -47,6 +56,12 @@ const Vehicles = () => {
                       />
                     </View>
                 )}
+                refreshControl={
+                  <RefreshControl 
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
               />
             </View>
           )
