@@ -10,4 +10,8 @@ export const useUserStore = create((set) => ({
   setHomeVehicle: (homeVehicle) => set({ homeVehicle: homeVehicle }),
   vehicleSelected: null,
   setVehicleSelected: (vehicle) => set({ vehicleSelected: vehicle }),
+  vehicleForEdit: null,
+  setVehicleForEdit: (vehicle) => set({ vehicleForEdit: vehicle }),
+  refuelForEdit: null,
+  setRefuelForEdit: (refuel) => set({ refuelForEdit: refuel }),
 }));

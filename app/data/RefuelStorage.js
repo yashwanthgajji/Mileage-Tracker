@@ -81,3 +81,28 @@ export const getAllRefuels = async () => {
     return [];
   }
 };
+
+export const updateRefuel = async (refuelId, updatedRefuel) => {
+  try {
+    const refuelsString = await AsyncStorage.getItem(REFUEL_STORAGE_KEY);
+    if (refuelsString) {
+      let refuels = JSON.parse(refuelsString);
+      const index = refuels.findIndex((refuel) => refuel.id === refuelId);
+      if (index !== -1) {
+        refuels[index] = updatedRefuel;
+        console.log(index)
+        console.log(refuels)
+        await AsyncStorage.setItem(REFUEL_STORAGE_KEY, JSON.stringify(refuels));
+        console.log('Refuel updated successfully!');
+      } else {
+        console.error('Refuel not found');
+        return null;
+      }
+    } else {
+      console.error('No refuels found');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error updating refuel:', error);
+  }
+};

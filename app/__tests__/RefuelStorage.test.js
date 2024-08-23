@@ -1,4 +1,4 @@
-import { addRefuel, getRefuelById, getAllRefuelsByVehicleId, getTop5RefuelsByVehicleId, getAllRefuels } from '../data/RefuelStorage';
+import { addRefuel, getRefuelById, getAllRefuelsByVehicleId, getTop5RefuelsByVehicleId, getAllRefuels, updateRefuel } from '../data/RefuelStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -132,4 +132,30 @@ describe('Refuel Storage', () => {
         });
     });
 
+    describe('updateRefuel', () => {
+        it('updates a refuel in storage', async () => {
+            const refuel1 = { id: 1, vehicleId: 1, fuel: 10, date: '12-08-2024', cost: '1000', totalKM: '560' };
+            const refuel2 = { id: 2, vehicleId: 1, fuel: 20, date: '23-08-2024', cost: '2100', totalKM: '650' };
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify([refuel1, refuel2]));
+            const updatedRefuel = { id: 1, vehicleId: 1, fuel: 15, date: '12-08-2024', cost: '1500', totalKM: '600' };
+            await updateRefuel(1, updatedRefuel);
+            expect(AsyncStorage.setItem).toHaveBeenCalledTimes(1);
+            expect(AsyncStorage.setItem).toHaveBeenCalledWith('REFUELS', JSON.stringify([updatedRefuel, refuel2]));
+        });
+      
+        it('returns null if no refuel with the matching id is found', async () => {
+            const refuel1 = { id: 1, vehicleId: 1, fuel: 10, date: '12-08-2024', cost: '1000', totalKM: '560' };
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify([refuel1]));
+            const updatedRefuel = { id: 2, vehicleId: 1, fuel: 20, date: '23-08-2024', cost: '2100', totalKM: '650' };
+            const result = await updateRefuel(2, updatedRefuel);
+            expect(result).toBeNull();
+        });
+      
+        it('returns null if storage is empty', async () => {
+            AsyncStorage.getItem.mockResolvedValue(null);
+            const updatedRefuel = { id: 1, vehicleId: 1, fuel: 10, date: '12-08-2024', cost: '1000', totalKM: '560' };
+            const result = await updateRefuel(1, updatedRefuel);
+            expect(result).toBeNull();
+        });
+      });
 });

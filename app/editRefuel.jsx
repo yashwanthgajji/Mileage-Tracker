@@ -6,27 +6,19 @@ import { router } from 'expo-router'
 import FormField from '../components/FormField'
 import CustomButton from '../components/CustomButton'
 import { useUserStore } from '../context/GlobalContext'
-import { addRefuel } from './data/RefuelStorage'
+import { updateRefuel } from './data/RefuelStorage'
 
-const createRefuel = () => {
-    const [form, setForm] = useState({
-        fuel: '',
-        cost: '',
-        totalKm: '',
-    })
-    const { vehicleSelected } = useUserStore();
+const editRefuel = () => {
+    const { refuelForEdit, setRefuelForEdit } = useUserStore();
+    const [refuel, setRefuel] = useState({ ...refuelForEdit });
 
-    const addNewRefuel = () => {
-        if (!form.fuel && !form.cost && !form.totalKm) {
+    const refuelUpdate = () => {
+        if (!refuel.fuel && !refuel.cost && !refuel.totalKm) {
             Alert.alert('Error', 'Please fill all fields')
         } else {
-            const refuelData = {
-                id: new Date().getTime(),
-                vehicleId: vehicleSelected.id,
-                date:  new Date().getTime(),
-                ...form,
-            }
-            addRefuel(refuelData)
+            console.log(refuel)
+            updateRefuel(refuel.id, refuel)
+            setRefuelForEdit(null)
             router.back()
         }
     }
@@ -35,41 +27,44 @@ const createRefuel = () => {
         <SafeAreaView className="bg-background h-full">
             <ScrollView>
                 <View className="w-full justify-center items-center h-full px-5 my-6">
-                    <Text className="text-2xl text-primary-800 text-semibold font-psemibold mt-4">Add New Refuel</Text>
+                    <Text className="text-2xl text-primary-800 text-semibold font-psemibold mt-4">Edit Refuel</Text>
                     <FormField
                         title="Fuel Added"
-                        value={form.fuel}
+                        value={refuel.fuel}
                         isRequired={true}
-                        handleChangeText={(e) => setForm({ ...form, fuel: e})}
+                        handleChangeText={(e) => setRefuel({ ...refuel, fuel: e })}
                         otherStyles="mt-4"
                         keyboardType="number-pad"
                     />
                     <FormField
                         title="Cost"
-                        value={form.cost}
+                        value={refuel.cost}
                         isRequired={true}
-                        handleChangeText={(e) => setForm({ ...form, cost: e})}
+                        handleChangeText={(e) => setRefuel({ ...refuel, cost: e })}
                         otherStyles="mt-4"
                         keyboardType="number-pad"
                     />
                     <FormField
                         title="Total KM"
                         subtitle="Total KM on you vehicle speedometer"
-                        value={form.totalKm}
+                        value={refuel.totalKm}
                         isRequired={true}
-                        handleChangeText={(e) => setForm({ ...form, totalKm: e})}
+                        handleChangeText={(e) => setRefuel({ ...refuel, totalKm: e })}
                         otherStyles="mt-4"
                         keyboardType="number-pad"
                     />
                     <View className="w-full flex-row mt-4">
                         <CustomButton
                             title="Cancel"
-                            handlePress={() => {router.back()}}
+                            handlePress={() => {
+                                setRefuelForEdit(null)
+                                router.back()
+                            }}
                             containerStyles="mt-2 flex-1 mx-2"
                         />
                         <CustomButton
-                            title="Add"
-                            handlePress={addNewRefuel}
+                            title="Update"
+                            handlePress={refuelUpdate}
                             containerStyles="mt-2 flex-1 mx-2"
                         />
                     </View>
@@ -79,4 +74,4 @@ const createRefuel = () => {
     )
 }
 
-export default createRefuel
+export default editRefuel

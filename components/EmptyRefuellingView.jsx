@@ -5,7 +5,7 @@ import { images } from '../constants'
 import CustomButton from '../components/CustomButton'
 import { router } from 'expo-router'
 
-const EmptyRefuellingView = ({ containerStyles }) => {
+const EmptyRefuellingView = ({ containerStyles, isDisabled }) => {
   return (
     <View className={`justify-center items-center w-full h-[320px] flex-col space-y-4 ${containerStyles}`}>
       <Image
@@ -19,6 +19,7 @@ const EmptyRefuellingView = ({ containerStyles }) => {
         handlePress={() => {router.push('/createRefuel')}}
         containerStyles="mt-7 w-[216px]"
         isRightShown = {true}
+        isDisabled={isDisabled}
       />
     </View>
   )

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import RefuellingItemView from '../../components/RefuellingItemView'
 import { SelectList } from 'react-native-dropdown-select-list'
@@ -9,33 +9,61 @@ import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { getAllRefuelsByVehicleId } from '../data/RefuelStorage'
 import { router } from 'expo-router'
 import EmptyVehicleListView from '../../components/EmptyVehicleListView'
+import { TouchableOpacity } from 'react-native'
 
 const Refuelling = () => {
-  const { user, vehicleSelected, setVehicleSelected } = useUserStore();
+  const { user, vehicleSelected, setVehicleSelected, setRefuelForEdit } = useUserStore();
   const [vehicles, setVehicles] = useState([])
   const [vehicleListData, setVehicleListData] = useState([]);
   const [refuels, setRefuels] = useState([])
 
+  const fetchVehicles = async () => {
+    const vehicles = await getAllVehiclesByUserId(user.id);
+    setVehicles(vehicles)
+    const vehicleListData = vehicles.map((vehicle) => ({
+      key: vehicle.id,
+      value: vehicle.name,
+    }));
+    setVehicleListData(vehicleListData);
+  };
+
   useEffect(() => {
-    const fetchVehicles = async () => {
-      const vehicles = await getAllVehiclesByUserId(user.id);
-      setVehicles(vehicles)
-      const vehicleListData = vehicles.map((vehicle) => ({
-        key: vehicle.id,
-        value: vehicle.name,
-      }));
-      setVehicleListData(vehicleListData);
-    };
     fetchVehicles();
   }, []);
+
+  const [vehiclesRefreshing, setVehiclesRefreshing] = useState(false)
+  const onVehiclesRefresh = async () => {
+    setVehiclesRefreshing(true)
+    await fetchVehicles()
+    setVehiclesRefreshing(false)
+  }
+
+  const getLatestRefuels = async (val) => {
+    // console.log(val)
+    const refuels = await getAllRefuelsByVehicleId(val);
+    setRefuels(refuels);
+    // console.log(refuels)
+  }
+
+  const [refuelsRefreshing, setRefuelsRefreshing] = useState(false)
+  const onRefuelsRefresh = async () => {
+    if (vehicleSelected) {
+      setRefuelsRefreshing(true)
+      await getLatestRefuels(vehicleSelected.id)
+      setRefuelsRefreshing(false)
+    }
+  }
 
   const setVehicleValue = async (val) => {
     // console.log(val)
     const selectedVehicle = vehicles.find((vehicle) => vehicle.id == val);
     setVehicleSelected(selectedVehicle);
-    const refuels = await getAllRefuelsByVehicleId(val);
-    setRefuels(refuels);
-    // console.log(refuels)
+    getLatestRefuels(val)
+  }
+
+  const editRefuel = (item) => {
+    setRefuelForEdit(item)
+    router.push('editRefuel')
   }
 
   return (
@@ -44,9 +72,18 @@ const Refuelling = () => {
         <Text className="text-2xl text-start w-full mt-7 text-primary-800 font-psemibold">Refuelling History</Text>
         {
           vehicles.length == 0 ? (
-            <EmptyVehicleListView
-              containerStyles="mt-24"
-            />
+            <ScrollView
+              refreshControl={
+                <RefreshControl
+                  refreshing={vehiclesRefreshing}
+                  onRefresh={onVehiclesRefresh}
+                />
+              }
+            >
+              <EmptyVehicleListView
+                containerStyles="mt-24"
+              />
+            </ScrollView>
           ) : (
             <View className="w-full h-full justify-start items-center">
               <SelectList
@@ -64,9 +101,19 @@ const Refuelling = () => {
               />
               {
                 refuels.length == 0 ? (
-                  <EmptyRefuellingView 
-                    containerStyles="mt-24"
-                  />
+                  <ScrollView
+                    refreshControl={
+                      <RefreshControl
+                        refreshing={vehiclesRefreshing}
+                        onRefresh={onVehiclesRefresh}
+                      />
+                    }
+                  >
+                    <EmptyRefuellingView 
+                      containerStyles="mt-24"
+                      isDisabled={vehicleSelected == null}
+                    />
+                  </ScrollView>
                 ) : (
                   <View className="w-full justify-center items-center">
                     <CustomButton
@@ -80,10 +127,20 @@ const Refuelling = () => {
                       data={refuels}
                       keyExtractor={(item) => {item.$id}}
                       renderItem={({item}) => (
+                        <TouchableOpacity
+                          onPress={() => {editRefuel(item)}}
+                        >
                           <RefuellingItemView
                             refuel={item}
                           />
+                        </TouchableOpacity>
                       )}
+                      refreshControl={
+                        <RefreshControl
+                          refreshing={refuelsRefreshing}
+                          onRefresh={onRefuelsRefresh}
+                        />
+                      }
                     />
                   </View>
                 )
