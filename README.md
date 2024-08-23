@@ -52,15 +52,25 @@ In the output, you'll find options to open the app in a
 ## Screenshots
 ### Authentication Screens
 <img src="screenshots/auth/splash.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/index.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/signup1.jpg" width="200">
-<br/>
-<br/>
+
 <img src="screenshots/auth/avatarselection.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/registerpasscode.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/signin.jpg" width="200">
-<br/>
-<br/>
+
 <img src="screenshots/auth/passcode.jpg" width="200">
 
 ### Home Screeens
-<img src="screenshots/home/home1.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home2.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home4.jpg" width="200">
+<img src="screenshots/home/home1.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home2.jpg" width="200">
 
 
-<img src="screenshots/home/home3.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/profile.jpg" width="200">
+<img src="screenshots/home/home3.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/profile.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home4.jpg" width="200">
+
+### Refuel and Performance Screens
+<img src="screenshots/refuel/refuelling1.jpg" width="200">&emsp;&emsp;<img src="screenshots/refuel/refuelling2.jpg" width="200">&emsp;&emsp;<img src="screenshots/refuel/refuelling3.jpg" width="200">
+
+<img src="screenshots/refuel/editrefuel.jpg" width="200">&emsp;&emsp;<img src="screenshots/refuel/performance1.jpg" width="200">&emsp;&emsp;<img src="screenshots/refuel/performance2.jpg" width="200">
+
+### Vehicle Screens
+<img src="screenshots/vehicles/vehicles1.jpg" width="200">&emsp;&emsp;<img src="screenshots/vehicles/vehicles2.jpg" width="200">&emsp;&emsp;<img src="screenshots/vehicles/vehicles3.jpg" width="200">
+
+<img src="screenshots/vehicles/vehicles4.jpg" width="200">&emsp;&emsp;<img src="screenshots/vehicles/newvehicle1.jpg" width="200">&emsp;&emsp;<img src="screenshots/vehicles/newvehicle2.jpg" width="200">
+
+<img src="screenshots/vehicles/editvehicle1.jpg" width="200">&emsp;&emsp;<img src="screenshots/vehicles/editvehicle2.jpg" width="200">
