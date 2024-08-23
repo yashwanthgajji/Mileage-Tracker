@@ -33,6 +33,7 @@ const Performance = () => {
   const onRefresh = async () => {
     setRefreshing(true)
     await fetchVehicles()
+    setVehicleSelected(null)
     setRefreshing(false)
   }
   
@@ -81,6 +82,7 @@ const Performance = () => {
                   refuels.length == 0 ? (
                     <EmptyRefuellingView 
                       containerStyles="mt-24"
+                      isDisabled={vehicleSelected == null}
                     />
                   ) : (
                     <View className="w-full">

@@ -39,6 +39,7 @@ const Home = () => {
   const onRefresh = async () => {
     setRefreshing(true)
     await fetchVehicles()
+    setVehicleSelected(null)
     setRefreshing(false)
   }
 
@@ -103,7 +104,9 @@ const Home = () => {
                   />
                   {
                     refuels.length == 0 ? (
-                      <EmptyRefuellingView/>
+                      <EmptyRefuellingView
+                        isDisabled={vehicleSelected == null}
+                      />
                     ) : (
                       <View>
                         <FuelInsightsView 
@@ -127,7 +130,14 @@ const Home = () => {
                   }
                 </View>
               ) : (
-                <View></View>
+                <View className="mt-10 w-full h-48 bg-gray-50 border-2 border-primary-800 rounded-xl flex-col justify-center items-center space-y-4">
+                  <Image
+                    source={images.garage}
+                    className="h-20 w-20"
+                    resizeMode='contain'
+                  />
+                  <Text className="text-lg font-pmedium text-secondary-600 text-center" numberOfLines={2}>Select a vehicle to view its data</Text>
+                </View>
               )}
             </View>
           ) : (

@@ -8,6 +8,7 @@ import fuel from '../assets/images/fuel.png'
 import auto from '../assets/images/auto.png'
 import truck from '../assets/images/truck.png'
 import steering from '../assets/images/steering.png'
+import garage from '../assets/images/garage.png'
 
 export default {
     logo,
@@ -20,4 +21,5 @@ export default {
     auto,
     truck,
     steering,
+    garage,
 }

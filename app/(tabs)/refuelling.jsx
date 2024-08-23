@@ -35,6 +35,7 @@ const Refuelling = () => {
   const onVehiclesRefresh = async () => {
     setVehiclesRefreshing(true)
     await fetchVehicles()
+    setVehicleSelected(null)
     setVehiclesRefreshing(false)
   }
 
