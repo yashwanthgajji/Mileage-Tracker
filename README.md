@@ -50,4 +50,17 @@ In the output, you'll find options to open the app in a
 ## Demo
 
 ## Screenshots
+### Authentication Screens
+<img src="screenshots/auth/splash.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/index.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/signup1.jpg" width="200">
+<br/>
+<br/>
+<img src="screenshots/auth/avatarselection.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/registerpasscode.jpg" width="200">&emsp;&emsp;<img src="screenshots/auth/signin.jpg" width="200">
+<br/>
+<br/>
+<img src="screenshots/auth/passcode.jpg" width="200">
 
+### Home Screeens
+<img src="screenshots/home/home1.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home2.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/home4.jpg" width="200">
+
+
+<img src="screenshots/home/home3.jpg" width="200">&emsp;&emsp;<img src="screenshots/home/profile.jpg" width="200">
