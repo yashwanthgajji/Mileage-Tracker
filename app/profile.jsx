@@ -27,18 +27,18 @@ const profile = () => {
                             resizeMode='contain'
                         />
                     </View>
-                    <View className="w-full h-64 mt-7 rounded-2xl bg-gray-600 p-4 flex-col space-y-2">
+                    <View className="w-full h-48 mt-7 rounded-2xl bg-gray-400 p-4 flex-col space-y-2">
                         <View className="flex-1 flex-row w-full justify-start items-center px-4 bg-gray-50 rounded-xl">
-                            <Text className="text-xl text-primary-800 font-psemibold">Name</Text>
-                            <Text className="text-base text-secondary-600 font-pregular mx-5">{user.name}</Text>
+                            <Text className="text-xl text-primary-800 font-psemibold w-[50%]">Name</Text>
+                            <Text className="text-lg text-secondary-600 font-pmedium mx-5 w-[50%]">{user.name}</Text>
                         </View>
                         <View className="flex-1 flex-row w-full justify-start items-center px-4 bg-gray-50 rounded-xl">
-                            <Text className="text-xl text-primary-800 font-psemibold">Nickname</Text>
-                            <Text className="text-base text-secondary-600 font-pregular mx-5">{user.nickname}</Text>
+                            <Text className="text-xl text-primary-800 font-psemibold  w-[50%]">Nickname</Text>
+                            <Text className="text-lg text-secondary-600 font-pmedium mx-5  w-[50%]">{user.nickname}</Text>
                         </View>
                         <View className="flex-1 flex-row w-full justify-start items-center px-4 bg-gray-50 rounded-xl">
-                            <Text className="text-xl text-primary-800 font-psemibold">Email</Text>
-                            <Text className="text-base text-secondary-600 font-pregular mx-5">{user.email}</Text>
+                            <Text className="text-xl text-primary-800 font-psemibold  w-[50%]">Email</Text>
+                            <Text className="text-lg text-secondary-600 font-pmedium mx-5  w-[50%]">{user.email}</Text>
                         </View>
                     </View>
                     <TouchableOpacity

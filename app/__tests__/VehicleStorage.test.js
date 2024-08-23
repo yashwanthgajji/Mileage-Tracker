@@ -1,4 +1,4 @@
-import { addVehicle, getAllVehicles, getAllVehiclesByUserId, getVehicleById } from '../data/VehicleStorage';
+import { addVehicle, getAllVehicles, getAllVehiclesByUserId, getVehicleById, updateVehicle } from '../data/VehicleStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -109,4 +109,30 @@ describe('Vehicle Storage', () => {
         });
     });
     
+    describe('updateVehicle', () => {
+        it('updates a vehicle in storage', async () => {
+            const vehicle1 = { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 };
+            const vehicle2 = { id: 2, userId: 1, name: 'RX100', type: '2 Wheeler', engine: 300 };
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify([vehicle1, vehicle2]));
+            const updatedVehicle = { id: 1, userId: 1, name: 'Toyota Updated', type: '4 Wheeler', engine: 1200 };
+            await updateVehicle(1, updatedVehicle);
+            expect(AsyncStorage.setItem).toHaveBeenCalledTimes(1);
+            expect(AsyncStorage.setItem).toHaveBeenCalledWith('VEHICLES', JSON.stringify([updatedVehicle, vehicle2]));
+        });
+      
+        it('returns null if no vehicle with the matching id is found', async () => {
+            const vehicle1 = { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 };
+            AsyncStorage.getItem.mockResolvedValue(JSON.stringify([vehicle1]));
+            const updatedVehicle = { id: 2, userId: 1, name: 'RX100 Updated', type: '2 Wheeler', engine: 350 };
+            const result = await updateVehicle(2, updatedVehicle);
+            expect(result).toBeNull();
+        });
+      
+        it('returns null if storage is empty', async () => {
+            AsyncStorage.getItem.mockResolvedValue(null);
+            const updatedVehicle = { id: 1, userId: 1, name: 'Toyota', type: '4 Wheeler', engine: 1000 };
+            const result = await updateVehicle(1, updatedVehicle);
+            expect(result).toBeNull();
+        });
+    });
 });

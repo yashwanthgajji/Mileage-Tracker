@@ -157,5 +157,5 @@ describe('Refuel Storage', () => {
             const result = await updateRefuel(1, updatedRefuel);
             expect(result).toBeNull();
         });
-      });
+    });
 });

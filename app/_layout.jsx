@@ -30,6 +30,7 @@ const RootLayout = () => {
       <Stack.Screen name='(auth)' options={{headerShown: false}}/>
       <Stack.Screen name='(tabs)' options={{headerShown: false}}/>
       <Stack.Screen name='createVehicle' options={{headerShown: false}}/>
+      <Stack.Screen name='editVehicle' options={{headerShown: false}}/>
       <Stack.Screen name='createRefuel' options={{headerShown: false}}/>
       <Stack.Screen name='editRefuel' options={{headerShown: false}}/>
       <Stack.Screen name='profile' options={{headerShown: false}}/>

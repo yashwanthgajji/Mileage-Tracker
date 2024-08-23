@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
 
 import VehicleCard from '../../components/VehicleCard'
 import CustomButton from '../../components/CustomButton'
@@ -8,9 +8,10 @@ import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import { useUserStore } from '../../context/GlobalContext'
 import { getAllVehiclesByUserId } from '../data/VehicleStorage'
 import { RefreshControl } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
 const Vehicles = () => {
-  const { user } = useUserStore();
+  const { user, setVehicleForEdit } = useUserStore();
   const [vehicles, setVehicles] = useState([])
   
   const fetchVehicles = async () => {
@@ -26,6 +27,11 @@ const Vehicles = () => {
     setRefreshing(true)
     await fetchVehicles()
     setRefreshing(false)
+  }
+
+  const editVehicle = (item) => {
+    setVehicleForEdit(item)
+    router.push('/editVehicle')
   }
 
   return (
@@ -50,11 +56,15 @@ const Vehicles = () => {
                 data={vehicles}
                 keyExtractor={(item) => {item.$id}}
                 renderItem={({item}) => (
+                  <TouchableOpacity
+                    onPress={() => {editVehicle(item)}}
+                  >
                     <View className="w-full">
                       <VehicleCard 
                         vehicle={item}
                       />
                     </View>
+                  </TouchableOpacity>
                 )}
                 refreshControl={
                   <RefreshControl 

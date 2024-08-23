@@ -16,7 +16,7 @@ const editRefuel = () => {
         if (!refuel.fuel && !refuel.cost && !refuel.totalKm) {
             Alert.alert('Error', 'Please fill all fields')
         } else {
-            console.log(refuel)
+            // console.log(refuel)
             updateRefuel(refuel.id, refuel)
             setRefuelForEdit(null)
             router.back()

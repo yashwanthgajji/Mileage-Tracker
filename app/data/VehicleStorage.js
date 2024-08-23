@@ -65,3 +65,26 @@ export const getAllVehicles = async () => {
     return [];
   }
 }
+
+export const updateVehicle = async (vehicleId, updatedVehicle) => {
+  try {
+    const vehiclesString = await AsyncStorage.getItem(VEHICLE_STORAGE_KEY);
+    if (vehiclesString) {
+      let vehicles = JSON.parse(vehiclesString);
+      const index = vehicles.findIndex((vehicle) => vehicle.id === vehicleId);
+      if (index !== -1) {
+        vehicles[index] = updatedVehicle;
+        await AsyncStorage.setItem(VEHICLE_STORAGE_KEY, JSON.stringify(vehicles));
+        console.log('Vehicle updated successfully!');
+      } else {
+        console.error('Vehicle not found');
+        return null;
+      }
+    } else {
+      console.error('No vehicles found');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error updating vehicle:', error);
+  }
+};
