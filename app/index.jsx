@@ -1,11 +1,9 @@
-import { StatusBar } from 'expo-status-bar'
 import { Text, View, Image, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
 
 import { images } from '../constants'
 import CustomButton from '../components/CustomButton'
-import {deleteAllRefuels} from './data/RefuelStorage'
 import { getAllUsers } from './data/UserStorage'
 import { useEffect } from 'react'
 
@@ -36,11 +34,6 @@ const index = () => {
             handlePress={ () => {router.push('/sign-up')} }
             containerStyles="w-full mt-4"
           />
-          {/* <CustomButton
-            title="Delete All Refuels"
-            handlePress={ deleteAllRefuels }
-            containerStyles="w-full mt-4"
-          /> */}
           <Image
             source={images.homeImage}
             resizeMode='contain'

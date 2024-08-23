@@ -1,14 +1,16 @@
 import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import CustomButton from '../../components/CustomButton'
 import PassCodeField from '../../components/PassCodeField'
 import { getAllUsers } from '../data/UserStorage'
-import { images } from '../../constants'
+import { icons, images } from '../../constants'
 import { useUserStore } from '../../context/GlobalContext'
 import SignInProfile from '../../components/SignInProfile'
+import { TouchableOpacity } from 'react-native'
 
 const SignIn = () => {
   const { setUser, setIsLoggedIn } = useUserStore();
@@ -44,6 +46,17 @@ const SignIn = () => {
       }
     }
   }
+
+  const deleteAllStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      router.dismissAll()
+      router.replace('/')
+      Alert.alert('Success', 'All storage data cleared!');
+    } catch (error) {
+      Alert.alert('Error', 'Failed to clear storage data');
+    }
+  };
 
   return (
     <SafeAreaView className="bg-background h-full">
@@ -92,6 +105,19 @@ const SignIn = () => {
                   containerStyles="w-full mt-4"
                   isAddShown
                 />
+                <TouchableOpacity
+                  className="mt-24 w-full rounded-full items-end"
+                  onPress={deleteAllStorage}
+                >
+                  <View className="flex-col justify-center items-center">
+                    <Image
+                      source={icons.bin}
+                      className="w-7 h-9"
+                      resizeMode='contain'
+                    />
+                    <Text className="text-secondary-800 text-xs font-pextralight">Delete all data</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             )
           }
