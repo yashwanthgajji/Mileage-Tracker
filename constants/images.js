@@ -5,6 +5,9 @@ import cloud from '../assets/images/cloud.png'
 import bike from '../assets/images/bike.png'
 import car from '../assets/images/car.png'
 import fuel from '../assets/images/fuel.png'
+import auto from '../assets/images/auto.png'
+import truck from '../assets/images/truck.png'
+import steering from '../assets/images/steering.png'
 
 export default {
     logo,
@@ -14,4 +17,7 @@ export default {
     bike,
     car,
     fuel,
+    auto,
+    truck,
+    steering,
 }

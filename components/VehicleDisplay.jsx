@@ -26,6 +26,15 @@ const VehicleDisplay = ({ containerStyles, vehicle: {picture, name, type, engine
                         )
                     }
                     {
+                        type == '3 Wheeler' && (
+                            <Image 
+                                source={images.auto}
+                                className="h-[50%] w-[50%]"
+                                resizeMode='contain'
+                            />
+                        )
+                    }
+                    {
                         type == '4 Wheeler' && (
                             <Image 
                                 source={images.car}
@@ -34,7 +43,16 @@ const VehicleDisplay = ({ containerStyles, vehicle: {picture, name, type, engine
                             />
                         )
                     }
-                    <Text className="text-black-200 text-xl font-pmedium">No Image</Text>
+                    {
+                        type == 'Other' && (
+                            <Image 
+                                source={images.steering}
+                                className="h-[50%] w-[50%]"
+                                resizeMode='contain'
+                            />
+                        )
+                    }
+                    <Text className="text-black-200 text-xl font-pmedium mt-4">No Image</Text>
                 </View>
             )
         }
