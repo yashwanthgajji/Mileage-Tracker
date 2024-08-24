@@ -4,15 +4,18 @@
 
 ## About
 
-An application that allows users to track enter and track their vehicle refuelling data and see mileage performance of their vehicles. Dynamic visualization of mileage performance and money spent on refuelling the vehicle can be seen.
+The Mileage Tracker application is a comprehensive tool designed for users to efficiently manage and track their vehicles' performance and fuel consumption. Users can securely sign up and log in to maintain their profiles, add and manage vehicle details, and record refuelling data. The app offers dynamic visualizations of monthly mileage, expenditures, and performance metrics, providing insights into driving habits and costs. All user data is stored locally using Async Storage, with Zustand handling global state management for a seamless experience.
 
 ### Features
-- User can sign up into application, see his profile on sign in page and login using 4 digit passcode.
-- User can add, edit and delete vehicle details. User can choose a picture for the vehicle and view all vehicles in Vehicles tab.
-- User can add, edit refuelling data for each vehicle and can be viewed in Refuelling tab.
-- User can see dynamic visualization of monthly mileage performance and money spent monthly and total average mileage and last mileage.
-- All data is stored in Async Storage (local storage).
-- Zustand is used for Global State Management.
+- Users can sign up and log in using a secure 4-digit passcode.
+- Upon signing in, users can view their profile on the sign-in page.
+- Users have the ability to add, edit, and delete vehicle details.
+- Vehicle images can be uploaded and managed within the application.
+- All vehicles are accessible in the "Vehicles" tab.
+- Users can add, edit, and view refuelling data for each vehicle in the "Refuelling" tab.
+- The application provides dynamic visualizations of monthly mileage performance, monthly expenditures, average mileage, and the most recent mileage.
+- All data is stored locally using Async Storage for efficient access and retrieval.
+- Zustand is utilized for global state management across the application.
 
 ### Technologies Used
 - React Native
