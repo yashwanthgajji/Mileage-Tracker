@@ -13,6 +13,7 @@ import { icons } from '../constants'
 import SelectDropDown from '../components/SelectDropDown'
 
 const createVehicle = () => {
+    const { vehicleCounter, setVehicleCounter } = useUserStore();
     const vehicleTypeListData = [
         { key: '2 Wheeler', value: '2 Wheeler' },
         { key: '3 Wheeler', value: '3 Wheeler' },
@@ -38,7 +39,7 @@ const createVehicle = () => {
         }
       }
 
-    const addNewVehicle = () => {
+    const addNewVehicle = async () => {
         if (!form.name && !form.type && !form.engine) {
             Alert.alert('Error', 'Please fill all fields')
         } else {
@@ -47,7 +48,8 @@ const createVehicle = () => {
                 userId: user.id,
                 ...form,
             }
-            addVehicle(vehicleData)
+            await addVehicle(vehicleData)
+            setVehicleCounter(vehicleCounter + 1)
             router.back()
         }
     }

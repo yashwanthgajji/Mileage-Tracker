@@ -11,7 +11,7 @@ import EmptyVehicleListView from '../../components/EmptyVehicleListView'
 import SelectDropDown from '../../components/SelectDropDown'
 
 const Refuelling = () => {
-  const { user, vehicleSelected, setVehicleSelected, setRefuelForEdit } = useUserStore();
+  const { user, vehicleSelected, setVehicleSelected, setRefuelForEdit, vehicleCounter, refuelCounter } = useUserStore();
   const [vehicles, setVehicles] = useState([])
   const [vehicleListData, setVehicleListData] = useState([]);
   const [refuels, setRefuels] = useState([])
@@ -28,7 +28,13 @@ const Refuelling = () => {
 
   useEffect(() => {
     fetchVehicles();
-  }, []);
+  }, [vehicleCounter]);
+
+  useEffect(() => {
+    if (vehicleSelected) {
+      getLatestRefuels(vehicleSelected.id)
+    }
+  }, [refuelCounter]);
 
   const [vehiclesRefreshing, setVehiclesRefreshing] = useState(false)
   const onVehiclesRefresh = async () => {
@@ -39,7 +45,7 @@ const Refuelling = () => {
   }
 
   const getLatestRefuels = async (val) => {
-    // console.log(val)
+    console.log(val)
     const refuels = await getAllRefuelsByVehicleId(val);
     setRefuels(refuels);
     // console.log(refuels)

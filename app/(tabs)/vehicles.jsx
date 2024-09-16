@@ -11,16 +11,18 @@ import { RefreshControl } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 
 const Vehicles = () => {
-  const { user, setVehicleForEdit } = useUserStore();
+  const { user, setVehicleForEdit, vehicleCounter, setVehicleCounter } = useUserStore();
   const [vehicles, setVehicles] = useState([])
   
   const fetchVehicles = async () => {
     const vehicles = await getAllVehiclesByUserId(user.id);
+    console.log(vehicles.length)
     setVehicles(vehicles)
   };
   useEffect(() => {
     fetchVehicles();
-  }, []);
+    console.log("is flagged")
+  }, [vehicleCounter]);
 
   const [refreshing, setRefreshing] = useState(false)
   const onRefresh = async () => {

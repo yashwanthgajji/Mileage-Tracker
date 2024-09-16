@@ -14,4 +14,8 @@ export const useUserStore = create((set) => ({
   setVehicleForEdit: (vehicle) => set({ vehicleForEdit: vehicle }),
   refuelForEdit: null,
   setRefuelForEdit: (refuel) => set({ refuelForEdit: refuel }),
+  vehicleCounter: 0,
+  setVehicleCounter: (counter) => set({ vehicleCounter: counter }),
+  refuelCounter: 0,
+  setRefuelCounter: (counter) => set({ refuelCounter: counter }),
 }));

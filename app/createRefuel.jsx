@@ -9,6 +9,8 @@ import { useUserStore } from '../context/GlobalContext'
 import { addRefuel } from './data/RefuelStorage'
 
 const createRefuel = () => {
+    const {refuelCounter, setRefuelCounter}  = useUserStore()
+
     const [form, setForm] = useState({
         fuel: '',
         cost: '',
@@ -16,7 +18,7 @@ const createRefuel = () => {
     })
     const { vehicleSelected } = useUserStore();
 
-    const addNewRefuel = () => {
+    const addNewRefuel = async () => {
         if (!form.fuel && !form.cost && !form.totalKm) {
             Alert.alert('Error', 'Please fill all fields')
         } else {
@@ -26,7 +28,8 @@ const createRefuel = () => {
                 date:  new Date().getTime(),
                 ...form,
             }
-            addRefuel(refuelData)
+            await addRefuel(refuelData)
+            setRefuelCounter(refuelCounter + 1)
             router.back()
         }
     }
